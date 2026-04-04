@@ -6,7 +6,9 @@
     "dev": "next dev --port 3005",
     "build": "next build",
     "start": "next start --port 3005",
-    "seed": "node scripts/seed.js"
+    "seed": "node scripts/seed.js",
+    "sync-tools": "node scripts/sync-tools.js",
+    "pre-push": "node scripts/git.js"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
