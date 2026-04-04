@@ -1,0 +1,14 @@
+import { YamlToJsonTool } from "@/components/tools/YamlToJson"
+import { Box } from "@/components/Box"
+
+<YamlToJsonTool />
+
+<Box>
+I need a YAML-to-JSON converter that runs entirely in the browser with no dependencies. Since there is no YAML parser in the JavaScript standard library, this tool implements a simple line-based parser that handles the subset of YAML that covers 90% of real-world config files.
+
+The parser processes the input line by line. For each line it measures the indentation depth, extracts the key and value from "key: value" pairs, and uses an indent-tracking stack to reconstruct the nesting hierarchy. It handles: flat key-value pairs, nested objects (detected when a key has no value and the next line is more indented), simple arrays (lines starting with "- "), quoted strings, numeric values, booleans (true/false), and null (null or ~). Comments starting with # are ignored.
+
+What it does not handle: YAML anchors and aliases, multi-line block scalars (| and > are detected but not fully processed), flow syntax (inline arrays and objects with brackets), merge keys, custom tags, or multi-document files. These are deliberate omissions to keep the parser small and dependency-free. If you need full YAML parsing, use a library like js-yaml.
+
+The output is pretty-printed JSON with 2-space indentation. The conversion happens on every keystroke so you can see the JSON update as you type or edit the YAML. A copy button grabs the full JSON output. The two panels sit side by side on desktop and stack on mobile.
+</Box>

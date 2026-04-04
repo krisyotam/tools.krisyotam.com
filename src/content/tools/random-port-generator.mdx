@@ -1,0 +1,14 @@
+import { RandomPortGeneratorTool } from "@/components/tools/RandomPortGenerator"
+import { Box } from "@/components/Box"
+
+<RandomPortGeneratorTool />
+
+<Box>
+I need a tool that generates random port numbers in the ephemeral range (1024-65535) for local development, testing, and service configuration. Ports below 1024 are privileged and require root on Unix systems, so those are excluded by default. The tool should let me configure how many ports to generate at once.
+
+Randomness comes from `crypto.getRandomValues()`, not `Math.random()`. This is not because port selection is security-critical, but because I want uniform distribution across the range and there is no reason to use the weaker source. The mapping uses modulo arithmetic on a `Uint32Array` value, which introduces negligible bias given the range size relative to 2^32.
+
+The generated ports are deduplicated within each batch. If I ask for 10 ports, I get 10 distinct ports. Each port is independently copyable, and there is a bulk copy button for the full list. This is useful when spinning up microservices locally and I need to assign non-conflicting ports quickly without thinking about it.
+
+Common port ranges worth knowing: 1024-49151 are "registered" ports assigned by IANA to specific services, and 49152-65535 are "dynamic" or "private" ports. In practice, any port in the 1024-65535 range is usable for local development as long as it is not already bound.
+</Box>

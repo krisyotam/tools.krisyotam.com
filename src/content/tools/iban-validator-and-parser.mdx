@@ -1,0 +1,14 @@
+import { IbanValidatorTool } from "@/components/tools/IbanValidator"
+import { Box } from "@/components/Box"
+
+<IbanValidatorTool />
+
+<Box>
+I need an IBAN validator that checks the MOD-97 checksum and extracts the country code and BBAN (Basic Bank Account Number). Enter an IBAN in any format (with or without spaces) and the tool validates it, shows the formatted version in 4-character groups, and identifies the country.
+
+IBAN validation uses the ISO 13616 algorithm: rearrange the IBAN by moving the first four characters (country code and check digits) to the end, convert all letters to numbers (A=10, B=11, ..., Z=35), and compute the remainder when divided by 97. If the remainder is 1, the IBAN is valid. This catches transposition errors and most single-character errors with a probability of 98/99.
+
+The MOD-97 computation on a number that can be 30+ digits long cannot use JavaScript's native number type (which loses precision beyond 2^53). Instead, the tool processes the numeric string in chunks, computing the modulo incrementally: take a prefix, compute its remainder, prepend that remainder to the next chunk, and repeat. This is equivalent to long division and works for arbitrarily long IBANs.
+
+The country code is the first two characters of the IBAN. The tool maps common European and Middle Eastern country codes to their names. The BBAN is everything after the first four characters and its structure varies by country (some countries use fixed-length alphanumeric BBANs, others are purely numeric). The tool does not validate BBAN structure per-country, only the overall MOD-97 check.
+</Box>

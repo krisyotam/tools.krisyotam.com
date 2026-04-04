@@ -1,0 +1,14 @@
+import { MarkdownToHtmlTool } from "@/components/tools/MarkdownToHtml"
+import { Box } from "@/components/Box"
+
+<MarkdownToHtmlTool />
+
+<Box>
+Build a Markdown-to-HTML converter with no external dependencies. Type or paste Markdown in the top textarea, see the raw HTML output in the bottom textarea and optionally a rendered preview above it. Live conversion as you type.
+
+The converter is a regex-based parser that handles the most common Markdown constructs: ATX headers (# through ######), bold (**text** and __text__), italic (*text* and _text_), strikethrough (~~text~~), inline code (`code`), fenced code blocks (triple backticks), links ([text](url)), images (![alt](url)), unordered lists (-, *, +), ordered lists (1.), blockquotes (>), horizontal rules (--- or *** or ___), and line breaks (two trailing spaces).
+
+The processing order matters. Code blocks must be extracted first so their contents are not processed by later rules. Headers and block-level elements are handled before inline formatting. Bold/italic use a greedy-then-lazy matching strategy to handle nested emphasis correctly. Text blocks that do not start with an HTML tag get wrapped in paragraph tags.
+
+This is not a full CommonMark implementation. It will not handle deeply nested lists, reference-style links, HTML passthrough, or edge cases in the spec around emphasis delimiter runs. For a production CMS you would use a proper parser like remark or markdown-it. But for quick Markdown-to-HTML conversions when composing emails or documentation snippets, a regex-based converter is fast, dependency-free, and handles the common cases correctly.
+</Box>

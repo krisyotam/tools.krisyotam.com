@@ -1,0 +1,14 @@
+import { TextStatisticsTool } from "@/components/tools/TextStatistics"
+import { Box } from "@/components/Box"
+
+<TextStatisticsTool />
+
+<Box>
+Build a text analysis tool that counts everything useful about a block of text in real time as I type or paste. I want character count, word count, sentence count, paragraph count, line count, byte size (UTF-8 encoded), and estimated reading time based on 250 words per minute.
+
+Word counting should split on whitespace after trimming. Sentence counting should look for terminal punctuation marks (periods, exclamation marks, question marks), falling back to treating the entire non-empty input as one sentence if no terminal punctuation exists. Paragraph counting should split on double newlines (blank line separators), filtering out empty segments. Byte count should use `TextEncoder` to get the actual UTF-8 encoded length, which differs from character count for any non-ASCII text.
+
+The reading time estimate uses 250 WPM, which is the commonly cited average for adult reading of non-technical English prose. It is a rough estimate. Technical writing, poetry, and dense academic text are read much more slowly. But for a quick sanity check on article length, it is useful enough.
+
+All computation should happen live as the input changes. No submit button needed. The statistics panel should always be visible, showing zeros when the input is empty.
+</Box>

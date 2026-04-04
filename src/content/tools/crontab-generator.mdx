@@ -1,0 +1,14 @@
+import { CrontabGeneratorTool } from "@/components/tools/CrontabGenerator"
+import { Box } from "@/components/Box"
+
+<CrontabGeneratorTool />
+
+<Box>
+I always have to look up crontab syntax. The five-field format is simple in principle (minute, hour, day-of-month, month, day-of-week) but I never remember which field is which, and the interaction between day-of-month and day-of-week is genuinely confusing even to people who use cron regularly.
+
+This tool gives me five input fields corresponding to the five cron fields, a dropdown of common presets for the schedules I use most often, and a human-readable English description of whatever schedule is currently configured. The presets cover the basics: every minute, every hour, daily at midnight, weekly, every N minutes, first of the month, and weekday-only schedules.
+
+The description generator handles simple cases: wildcards, specific values, ranges, and step values. It does not attempt to parse every legal cron expression (that would require handling lists, ranges, and steps in combination, which is a surprisingly deep rabbit hole). For complex expressions, the generated description is approximate. The cron expression itself is always the source of truth.
+
+Each field accepts standard cron syntax: `*` for every value, specific numbers, comma-separated lists, ranges with `-`, and step values with `/`. The tool does not validate the expression beyond displaying it. If you enter something illegal, cron will reject it when you install the crontab. The value of this tool is in constructing the expression visually, not in replacing the crontab manual.
+</Box>

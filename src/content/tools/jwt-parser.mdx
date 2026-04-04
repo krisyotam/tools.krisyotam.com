@@ -1,0 +1,16 @@
+import { JwtParserTool } from "@/components/tools/JwtParser"
+import { Box } from "@/components/Box"
+
+<JwtParserTool />
+
+<Box>
+I need a JWT decoder that takes a JSON Web Token string, splits it on the dots, base64url-decodes the header and payload segments, and displays each as pretty-printed JSON. It should also check for an `exp` claim and show whether the token is currently expired.
+
+A JWT is three base64url-encoded segments separated by periods: header, payload, and signature. The header typically contains the algorithm (`alg`) and token type (`typ`). The payload contains the claims, which are the actual data: subject, issuer, issued-at time, expiration, and any custom claims. The signature is a cryptographic MAC or digital signature over the first two segments, but this tool does not verify it. Verification requires the signing key, which I would not paste into a browser tool.
+
+Base64url encoding differs from standard base64 in two characters: `+` becomes `-` and `/` becomes `_`, and padding `=` is omitted. The decoder must reverse these substitutions before calling `atob()`.
+
+I reach for this constantly when debugging OAuth2 flows, inspecting access tokens returned by identity providers, or checking whether a token's claims match what the API expects. The expiration check is particularly useful: half the time a "401 Unauthorized" turns out to be an expired token, and seeing the `exp` timestamp decoded and compared against the current time saves me from doing that math manually.
+
+Everything stays in the browser. The token is never sent anywhere.
+</Box>

@@ -1,0 +1,14 @@
+import { SvgPlaceholderTool } from "@/components/tools/SvgPlaceholder"
+import { Box } from "@/components/Box"
+
+<SvgPlaceholderTool />
+
+<Box>
+I need a tool that generates SVG placeholder images with custom dimensions, colors, and text. These are useful during front-end development when the actual images are not yet available. Unlike raster placeholders, SVG scales to any resolution without pixelation, and the entire image is a few hundred bytes of text.
+
+The generated SVG is a rectangle filled with the background color and centered text. The text defaults to the dimensions (e.g., "640x480") if you leave the text field empty, which is the standard convention for placeholder images. The font size is automatically scaled based on the smaller dimension of the image so the text remains readable at any aspect ratio.
+
+The tool outputs three things: a live preview rendered from a data URI, the raw SVG source code for embedding in HTML, and the data URI for use in CSS `background-image` or `img src` attributes. All three are copyable. The data URI uses `charset=UTF-8` encoding with percent-escaping rather than base64, which is more readable and compresses slightly better for SVG content.
+
+The color inputs accept any valid CSS color value (hex, rgb, hsl, named colors) in the text field, and also provide a native color picker for visual selection. The preview updates in real time as you adjust the parameters.
+</Box>

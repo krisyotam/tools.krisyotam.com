@@ -1,0 +1,16 @@
+import { AsciiTextDrawerTool } from "@/components/tools/AsciiTextDrawer"
+import { Box } from "@/components/Box"
+
+<AsciiTextDrawerTool />
+
+<Box>
+Type text and see it rendered in block-style ASCII art. Each character maps to a 5-line-tall, 5-column-wide glyph built from hash marks and spaces. The full uppercase alphabet, digits 0-9, and a few punctuation marks (space, period, exclamation, question mark, hyphen) are supported.
+
+The font is intentionally simple. There are no serifs, no variable widths, no kerning. Each glyph occupies a fixed 5x5 grid, which makes the output predictable and easy to read in monospaced terminals. More sophisticated ASCII art generators use larger glyph sizes (like FIGlet's 6-10 line fonts) to achieve better letterforms, but those require font definition files and substantially more code. This covers the basic use case with zero dependencies.
+
+Input is case-insensitive. Lowercase letters are converted to uppercase before rendering. Characters not in the font database render as blank 5x5 spaces, so the text flows without errors even if you type something unsupported.
+
+The output is plain text suitable for pasting into comments, commit messages, READMEs, terminal banners, or anywhere monospaced text is displayed. Copy the result and it preserves the exact spacing. The rendering works best with short strings. Long text will produce very wide output that requires horizontal scrolling, which is the inherent limitation of this style of ASCII art.
+
+I use this for generating quick banners in shell scripts, adding visual headers to log files, or making terminal output more noticeable when something important happens.
+</Box>

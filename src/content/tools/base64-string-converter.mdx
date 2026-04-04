@@ -1,0 +1,14 @@
+import { Base64Tool } from "@/components/tools/Base64"
+import { Box } from "@/components/Box"
+
+<Base64Tool />
+
+<Box>
+Build a base64 encoder and decoder with a toggle between the two modes. When encoding, take plain text input and output the base64 representation. When decoding, take a base64 string and output the original text.
+
+The tricky part is UTF-8. The browser's native `btoa()` only handles Latin-1 characters; anything outside that range throws an `InvalidCharacterError`. The standard workaround is to first encode the string to UTF-8 bytes via `encodeURIComponent` plus `unescape`, then pass that to `btoa()`. For decoding, reverse the process: `atob()` first, then `escape` plus `decodeURIComponent` to reconstruct the UTF-8 string.
+
+This is a well-known pattern but it is easy to get wrong, especially with emoji or CJK characters. The tool should handle all of Unicode correctly without silently corrupting multibyte sequences.
+
+If the input is invalid for the current mode (malformed base64 when decoding, for instance), show a clear error rather than producing garbage output. No external dependencies.
+</Box>

@@ -1,0 +1,16 @@
+import { EmailNormalizerTool } from "@/components/tools/EmailNormalizer"
+import { Box } from "@/components/Box"
+
+<EmailNormalizerTool />
+
+<Box>
+I need a tool that normalizes email addresses for deduplication and consistency. Paste a list of emails (one per line) and the tool applies three normalizations: convert to lowercase, remove dots from the local part of Gmail addresses, and strip plus-suffixes from any address.
+
+The lowercase conversion is unambiguous. RFC 5321 specifies that the local part of an email address is technically case-sensitive, but in practice every major email provider treats it as case-insensitive. Lowercasing is safe for all realistic use cases.
+
+Dot removal applies only to Gmail (gmail.com and googlemail.com). Google ignores dots in the local part: `john.doe@gmail.com` and `johndoe@gmail.com` deliver to the same inbox. Other providers do not share this behavior, so dots are preserved for non-Gmail addresses.
+
+Plus-suffix stripping removes everything from the first `+` to the `@` sign. The plus-addressing convention (`user+tag@domain`) is widely supported and commonly used for filtering, but when comparing email addresses for uniqueness, the suffix should be removed. Note that some less common providers do not support plus addressing at all, in which case the `+` is part of the actual local part. This tool assumes plus-addressing is in use.
+
+All processing happens in the browser. No email addresses are transmitted anywhere.
+</Box>

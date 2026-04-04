@@ -1,0 +1,16 @@
+import { DockerRunToComposeTool } from "@/components/tools/DockerRunToCompose"
+import { Box } from "@/components/Box"
+
+<DockerRunToComposeTool />
+
+<Box>
+Paste a `docker run` command and get back a docker-compose.yml snippet. The parser handles the flags I encounter most often: `-p` for port mappings, `-v` for volume mounts, `-e` for environment variables, `--name` for the container name, `--restart` for the restart policy, and `-d` for detached mode (which has no compose equivalent since services run detached by default).
+
+The tokenizer handles quoted strings and backslash-newline continuations, which matters because real docker run commands tend to be multi-line with backslash escapes. It splits on whitespace while respecting single and double quotes, so environment variables with spaces in their values parse correctly.
+
+Flag parsing follows docker's conventions: `-p 8080:80` and `-p=8080:80` both work. Short flags that accept values consume the next token. Unknown flags are skipped gracefully. The image name is identified as the first positional argument after all flags have been consumed.
+
+The output is valid docker-compose v3 YAML. The service name defaults to the container name if `--name` was specified, otherwise it extracts the image name without the registry prefix or tag. Ports are quoted in the YAML output because YAML interprets bare `80:80` as a sexagesimal number, which is a notorious gotcha.
+
+This does not handle every possible docker run flag. Networking modes, capabilities, device mappings, and resource constraints are omitted because they appear less frequently and the mapping to compose syntax varies by version. For those cases, I add them manually after converting the common flags. The goal is to handle the 80% case instantly and leave the remaining 20% for manual editing.
+</Box>

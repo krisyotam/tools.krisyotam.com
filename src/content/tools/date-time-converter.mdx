@@ -1,0 +1,16 @@
+import { DateTimeConverterTool } from "@/components/tools/DateTimeConverter"
+import { Box } from "@/components/Box"
+
+<DateTimeConverterTool />
+
+<Box>
+I need a date-time converter that accepts almost any reasonable input and shows all the standard representations at once. The input field should handle Unix timestamps in seconds (10 digits) and milliseconds (13 digits), ISO 8601 strings, RFC 2822 strings, and anything else the JavaScript Date constructor can parse. The tool detects what you gave it and converts in real time.
+
+The output should show six rows: Unix seconds, Unix milliseconds, ISO 8601, UTC string, locale string, and a relative time like "3h ago" or "in 2d". The relative time needs to tick every second so it stays accurate while you're looking at it. Each row gets a copy button.
+
+Parsing strategy: check if the input is all digits first. If it's 9-10 digits, treat it as seconds since epoch. If it's 13 digits, treat it as milliseconds. Otherwise fall through to `new Date(value)` which handles ISO, RFC 2822, and various locale formats. If nothing works, show a parse error.
+
+The tricky edge case is timezone handling. `new Date("2024-01-15")` parses as midnight UTC, but `new Date("2024-01-15T00:00:00")` parses as midnight local time. This is a well-known JavaScript footgun. The tool does not try to normalize this; it parses what you give it and shows all representations of the resulting instant. If you want UTC, pass a UTC string.
+
+No external date libraries. The native Date object and its formatting methods are sufficient for a converter like this. The goal is quick lookups when you're staring at a Unix timestamp in a log file and need to know what time that was.
+</Box>

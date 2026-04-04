@@ -1,0 +1,14 @@
+import { PercentageCalculatorTool } from "@/components/tools/PercentageCalculator"
+import { Box } from "@/components/Box"
+
+<PercentageCalculatorTool />
+
+<Box>
+I need a percentage calculator that handles the three common percentage questions without requiring me to remember which way the formula goes. The three modes are: "What is X% of Y?" (multiply), "X is what percent of Y?" (divide), and "What is the percentage change from X to Y?" (difference over base).
+
+Each mode is its own section with dedicated inputs and a result. The formulas are trivial. Mode 1: `(X / 100) * Y`. Mode 2: `(X / Y) * 100`. Mode 3: `((Y - X) / X) * 100`. The percentage change mode shows a `+` prefix for increases and no prefix for decreases, since the negative sign naturally indicates a decrease.
+
+These calculations are simple enough to do mentally, but the friction of remembering which number goes in the numerator vs denominator is real. Having three clearly labeled sections eliminates that. The results update as you type, so there is no compute button to press.
+
+Division by zero is handled implicitly by JavaScript: dividing by zero produces `Infinity` or `NaN`, which is displayed as-is. If you enter zero for the base value in modes 2 or 3, the result will be `Infinity%` or `NaN%`, which is mathematically correct. Percentage change from zero to any nonzero value is undefined.
+</Box>

@@ -1,0 +1,14 @@
+import { HtmlEntitiesTool } from "@/components/tools/HtmlEntities"
+import { Box } from "@/components/Box"
+
+<HtmlEntitiesTool />
+
+<Box>
+I need a bidirectional HTML entity encoder and decoder. Two textareas: type in the top one and the bottom one shows the escaped version, type in the bottom one and the top one shows the unescaped version. Real-time, no submit button.
+
+The escaping should cover the five mandatory XML/HTML entities: `&` to `&amp;`, `<` to `&lt;`, `>` to `&gt;`, `"` to `&quot;`, and `'` to `&#39;`. These are the characters that will break HTML parsing if left unescaped inside element content or attribute values. I do not need named entities for every Unicode character; this is about structural safety, not typography.
+
+For unescaping, use the browser's own HTML parser by writing the escaped string into a textarea element's `innerHTML` and reading back `value`. This handles not just the five basic entities but also numeric character references (`&#60;`, `&#x3C;`) and all named entities (`&mdash;`, `&nbsp;`, etc.) because the browser's parser knows the full entity table. It is more correct than any hand-rolled lookup.
+
+The use case is constant: copying text out of HTML source to use elsewhere, or taking plaintext that contains angle brackets and ampersands and making it safe to embed in markup. I use this daily when writing documentation, editing templates, or debugging rendered output that looks wrong because of double-escaping.
+</Box>

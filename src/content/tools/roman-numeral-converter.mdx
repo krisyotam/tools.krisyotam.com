@@ -1,0 +1,14 @@
+import { RomanNumeralConverterTool } from "@/components/tools/RomanNumeralConverter"
+import { Box } from "@/components/Box"
+
+<RomanNumeralConverterTool />
+
+<Box>
+I want a bidirectional Roman numeral converter. Two input fields side by side: type an Arabic number on the left, see the Roman numeral on the right, or type a Roman numeral on the right and see the Arabic number on the left. Live conversion as you type.
+
+The Arabic-to-Roman algorithm uses a greedy approach: define a table of value-symbol pairs in descending order (M=1000, CM=900, D=500, CD=400, C=100, XC=90, L=50, XL=40, X=10, IX=9, V=5, IV=4, I=1), then repeatedly subtract the largest value that fits and append its symbol. This naturally handles subtractive notation.
+
+Roman-to-Arabic works by scanning left to right. If the current symbol's value is less than the next symbol's value, subtract it; otherwise add it. This handles IV=4, IX=9, XL=40, and all other subtractive pairs correctly.
+
+The valid range is 1 to 3999. There is no standard Roman representation for zero, and numbers above 3999 require vinculum notation (bars over letters) which is outside the scope of this tool. The converter validates Roman input by converting back to Arabic and then back to Roman again, checking that the round-trip produces the same string. This catches malformed input like "IIII" or "VV" that would parse to a number but are not canonical forms.
+</Box>

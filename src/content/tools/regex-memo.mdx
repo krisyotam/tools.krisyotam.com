@@ -1,0 +1,14 @@
+import { RegexMemoTool } from "@/components/tools/RegexMemo"
+import { Box } from "@/components/Box"
+
+<RegexMemoTool />
+
+<Box>
+A reference card for regular expression syntax. Every section covers a different aspect of the regex language: character classes for matching categories of characters, quantifiers for repetition, anchors for position, groups for capturing and alternation, lookahead and lookbehind for zero-width assertions, and flags for modifying match behavior.
+
+The syntax here is JavaScript/PCRE-compatible, which covers the vast majority of regex implementations in use today. Python, Java, .NET, Ruby, Go, and Rust all support most of these features with minor variations. The notable exception is lookbehind: JavaScript requires fixed-length lookbehind patterns in older engines, though modern V8 supports variable-length lookbehind. POSIX regex (used in grep and sed without the -P flag) uses a different syntax entirely and does not support lookaround at all.
+
+The common patterns section at the bottom provides starting points for frequently needed matches. These are deliberately simple. The email regex, for example, is `^\S+@\S+\.\S+$`, which is not RFC 5322 compliant but catches the obvious formatting errors. A truly correct email regex is hundreds of characters long and still does not tell you whether the address exists. For production email validation, send a confirmation email.
+
+I keep this reference around because I write regex often enough to know the concepts but not often enough to remember the exact syntax for named groups or negative lookbehind. The copy button on each pattern makes it fast to grab a snippet and paste it into a test tool or source file.
+</Box>

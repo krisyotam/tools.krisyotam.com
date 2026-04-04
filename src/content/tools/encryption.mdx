@@ -1,0 +1,14 @@
+import { EncryptDecryptTool } from "@/components/tools/EncryptDecrypt"
+import { Box } from "@/components/Box"
+
+<EncryptDecryptTool />
+
+<Box>
+I need AES-GCM encryption and decryption in the browser. The user provides plaintext and a password. The tool derives an AES-256 key from the password using PBKDF2 with 100,000 iterations and SHA-256, then encrypts the plaintext with AES-GCM using a random 12-byte IV. The output is base64-encoded and contains the 16-byte salt, 12-byte IV, and ciphertext concatenated together so that decryption only needs the base64 string and the password.
+
+AES-GCM (Galois/Counter Mode) provides both confidentiality and authenticity. The 128-bit authentication tag is appended to the ciphertext automatically by the Web Crypto API. If anyone tampers with the ciphertext or uses the wrong password, decryption will fail with an integrity error rather than producing garbage output. This is a significant advantage over modes like CBC that decrypt silently even with the wrong key.
+
+PBKDF2 (Password-Based Key Derivation Function 2) stretches the password into a 256-bit key by running HMAC-SHA256 iteratively 100,000 times. This makes brute-force attacks on weak passwords roughly 100,000 times slower. A random 16-byte salt ensures that the same password produces different keys for different encryptions, defeating precomputation attacks. The 12-byte IV ensures that the same plaintext encrypted with the same key produces different ciphertext each time.
+
+The entire operation runs in the browser using the Web Crypto API. No plaintext, password, or ciphertext is transmitted anywhere. The output is self-contained: paste it back into the decrypt mode with the same password and you get the original text. I use this for sharing sensitive snippets, storing encrypted notes, and testing encryption workflows before implementing them in production code.
+</Box>

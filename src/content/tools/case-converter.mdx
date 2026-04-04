@@ -1,0 +1,14 @@
+import { CaseConverterTool } from "@/components/tools/CaseConverter"
+import { Box } from "@/components/Box"
+
+<CaseConverterTool />
+
+<Box>
+Build a case converter that takes any input text and shows it transformed into every common naming convention simultaneously. I do not want a dropdown selector where I pick one format at a time. I want to type once and see all conversions at a glance: camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, dot.case, path/case, Title Case, Sentence case, lowercase, and UPPERCASE.
+
+The core challenge is tokenization. The tool needs to split the input into words before it can reassemble them in a new format. The splitter should handle: camelCase boundaries (insert a split between a lowercase letter followed by an uppercase letter), underscores, hyphens, dots, slashes, backslashes, and whitespace. All of these are common word delimiters across different conventions and the tool should recognize all of them.
+
+Once tokenized into an array of words, each output format is a trivial recombination: join with the appropriate delimiter and apply the appropriate casing to each word. camelCase lowercases the first word and capitalizes subsequent ones. PascalCase capitalizes all. snake_case joins with underscores and lowercases. And so on.
+
+This is a tool I use multiple times a day when moving between codebases that use different conventions, renaming database columns to match API response keys, or converting between CSS class names and JavaScript property names.
+</Box>

@@ -1,0 +1,14 @@
+import { MimeTypesTool } from "@/components/tools/MimeTypes"
+import { Box } from "@/components/Box"
+
+<MimeTypesTool />
+
+<Box>
+A bidirectional lookup between file extensions and MIME types. Type an extension like "png" and get "image/png". Type a MIME type fragment like "audio" and get every audio extension in the database. The search is case-insensitive and strips leading dots, so ".jpg", "jpg", and "JPG" all work.
+
+The database covers roughly 80 common extensions across text, image, audio, video, font, archive, document, and code categories. It does not attempt to be exhaustive. The IANA maintains a registry of over 1,500 MIME types, and most of them are vendor-specific formats nobody encounters outside niche enterprise software. What is here covers the file types you actually deal with when building web applications, configuring servers, or setting Content-Type headers.
+
+The matching logic tries exact extension match first, then exact MIME match, then substring match on the MIME string, and finally falls back to partial extension match. This means searching for "json" will find "application/json" by exact extension, while searching for "application" will return every MIME type in the application/* family.
+
+I built this because I can never remember whether it is "image/svg+xml" or "image/svg", whether JavaScript is "application/javascript" or "text/javascript" (both are valid, but application/javascript is correct per RFC 4329), or what the MIME type for .woff2 fonts is. Now I just look it up here instead of searching MDN every time.
+</Box>

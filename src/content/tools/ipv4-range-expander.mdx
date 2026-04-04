@@ -1,0 +1,16 @@
+import { Ipv4RangeExpanderTool } from "@/components/tools/Ipv4RangeExpander"
+import { Box } from "@/components/Box"
+
+<Ipv4RangeExpanderTool />
+
+<Box>
+Enter a start and end IPv4 address and get the minimal set of CIDR blocks that exactly covers that range. For each block, the tool shows the CIDR notation, network address, broadcast address, subnet mask, prefix length, and total address count.
+
+The algorithm works by finding the largest power-of-two aligned block starting at the current address that does not exceed the end of the range. It emits that block, advances to the next address after the block's broadcast, and repeats until the entire range is covered. This is a greedy algorithm that produces the minimal number of CIDR blocks for any arbitrary range.
+
+A single /24 range like 192.168.1.0 to 192.168.1.255 produces one block. An unaligned range like 192.168.1.10 to 192.168.1.50 produces multiple smaller blocks because CIDR requires power-of-two alignment. This is fundamental to how CIDR works and is not a limitation of the tool.
+
+For each block, the subnet mask is displayed in dotted-decimal notation alongside the prefix length. The broadcast address is the last address in the block. The host count includes the network and broadcast addresses, so a /24 shows 256 addresses, not 254 usable hosts. If you need usable host count, subtract 2 from the displayed number for any prefix shorter than /31.
+
+This is useful for firewall rules, ACL entries, and routing table configurations where you need to express an IP range as one or more CIDR blocks. It also helps when translating between the range notation that some ISPs use and the CIDR notation that network equipment expects.
+</Box>

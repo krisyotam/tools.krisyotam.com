@@ -1,0 +1,14 @@
+import { JsonToYamlTool } from "@/components/tools/JsonToYaml"
+import { Box } from "@/components/Box"
+
+<JsonToYamlTool />
+
+<Box>
+Build a JSON-to-YAML converter with no external dependencies. Paste JSON on the left, get YAML on the right. The converter uses a recursive serializer that walks the parsed JSON tree and emits YAML syntax at each level.
+
+The serializer handles all JSON types: strings, numbers, booleans, null, arrays, and objects. Strings that could be ambiguous in YAML (empty strings, strings that look like numbers or booleans, strings containing special YAML characters like colons or hashes) are quoted using JSON-style double quotes. Everything else is written bare.
+
+Objects are serialized as indented key-value pairs with 2-space indentation per level. Arrays use the "- " prefix syntax. Nested structures recurse naturally. Empty arrays serialize to "[]" and empty objects to "{}" inline rather than producing empty blocks.
+
+The one thing this cannot produce is the full range of YAML features that have no JSON equivalent: anchors, aliases, comments, multi-line block scalars, tags, and ordered mappings. Since the input is JSON, none of those are needed. The output is clean, minimal YAML that any YAML parser will read correctly. This is the tool I reach for when migrating a configuration file from JSON to YAML format or when I need to paste a JSON API response into a YAML-based config.
+</Box>

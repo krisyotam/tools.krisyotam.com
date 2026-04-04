@@ -1,0 +1,16 @@
+import { Ipv6UlaGeneratorTool } from "@/components/tools/Ipv6UlaGenerator"
+import { Box } from "@/components/Box"
+
+<Ipv6UlaGeneratorTool />
+
+<Box>
+Generate RFC 4193 Unique Local Addresses for IPv6 private networks. Each click produces a new random /48 prefix in the fd00::/8 range, along with a /64 subnet, first and last addresses, and the raw global and subnet ID values.
+
+The structure of a ULA is: fd + 40 random bits (global ID) + 16 bits (subnet ID) + 64 bits (interface ID). The fd prefix marks the address as locally assigned. The 40-bit global ID provides enough randomness that two independently generated ULAs have a negligible probability of collision (about 1 in a trillion), which means you can merge networks without renumbering. The 16-bit subnet ID gives you 65,536 subnets within each /48 allocation.
+
+The random bits are generated using the Web Crypto API (crypto.getRandomValues), which provides cryptographically strong random numbers. RFC 4193 technically recommends deriving the global ID from a hash of the current time and EUI-64 identifier, but using a CSPRNG produces equivalent uniqueness properties with simpler code.
+
+The output shows both the /48 prefix (your entire allocation) and a /64 prefix (one subnet within that allocation). In practice, you assign the /48 to your organization and carve /64 subnets from it for individual network segments. The first and last address fields show the range of the /64 subnet.
+
+ULAs are the IPv6 equivalent of RFC 1918 private addresses (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16). Use them for internal communication between hosts on your network. They are not routable on the public internet. Every home lab, office network, or VPN overlay that uses IPv6 internally should have a ULA allocation, and this tool generates one in a single click.
+</Box>

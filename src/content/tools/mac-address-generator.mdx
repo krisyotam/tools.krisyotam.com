@@ -1,0 +1,14 @@
+import { MacAddressGeneratorTool } from "@/components/tools/MacAddressGenerator"
+import { Box } from "@/components/Box"
+
+<MacAddressGeneratorTool />
+
+<Box>
+I need a random MAC address generator for testing network configurations, populating test fixtures, and spoofing scenarios. A MAC address is 6 octets (48 bits). The tool generates them using `crypto.getRandomValues()` and formats them with a configurable separator (colon, hyphen, or dot) and case (upper or lower).
+
+Note that these are fully random MACs, which means the first octet may have the locally-administered bit (bit 1) cleared, making them look like globally unique (OUI-assigned) addresses. In production spoofing scenarios you would want to set bit 1 of the first octet to indicate a locally administered address and clear bit 0 to indicate unicast. This tool does not enforce that because for most testing purposes any random 6 bytes will do.
+
+The three separator conventions correspond to different ecosystems: colons (`aa:bb:cc:dd:ee:ff`) are standard on Linux and in most network documentation, hyphens (`aa-bb-cc-dd-ee-ff`) appear in Windows and IEEE notation, and dots (`aabb.ccdd.eeff`) are used by Cisco. Uppercase vs lowercase is a pure formatting preference with no semantic difference.
+
+Each generated address is independently copyable, and there is a bulk copy button for the full list. Generation is batched: specify a count between 1 and 100.
+</Box>

@@ -1,0 +1,14 @@
+import { TemperatureConverterTool } from "@/components/tools/TemperatureConverter"
+import { Box } from "@/components/Box"
+
+<TemperatureConverterTool />
+
+<Box>
+I need a temperature converter that handles all four common temperature scales: Celsius, Fahrenheit, Kelvin, and Rankine. Enter a value in any one scale, and the tool shows the equivalent in all four. The conversion updates in real time as you type.
+
+All conversions go through Celsius as the intermediate representation. Fahrenheit to Celsius is `(F - 32) * 5/9`. Kelvin to Celsius is `K - 273.15`. Rankine to Celsius is `(R - 491.67) * 5/9`. From Celsius, the reverse formulas produce the other three scales. This two-step approach means only four conversion formulas are needed rather than twelve.
+
+Rankine is included because it appears occasionally in engineering thermodynamics, particularly in American textbooks and older HVAC specifications. It is the Fahrenheit-scale analog of Kelvin: absolute zero in Rankine is 0, just as it is in Kelvin, but the degree size matches Fahrenheit rather than Celsius. Most people never encounter it, but when you need it, you need it and cannot find a converter that includes it.
+
+Trailing zeros are stripped from the output for readability. The precision is limited by JavaScript's floating-point arithmetic, which is IEEE 754 double precision. For everyday temperature conversions the precision is more than sufficient.
+</Box>

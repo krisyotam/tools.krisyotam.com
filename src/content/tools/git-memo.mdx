@@ -1,0 +1,14 @@
+import { GitMemoTool } from "@/components/tools/GitMemo"
+import { Box } from "@/components/Box"
+
+<GitMemoTool />
+
+<Box>
+I keep a git cheatsheet because git has somewhere north of 150 subcommands and I use maybe 30 of them regularly. The other 120 sit in man pages I never read until I need them at 2 AM during a rebase gone sideways. This page is the distilled set I actually reach for.
+
+The sections are organized by workflow rather than alphabetically. Basics covers the init-add-commit loop that accounts for 90% of daily git usage. Branching and remote operations come next because they are the second most common task. Stash is its own section because the stash subcommands have their own mini-workflow that trips people up (the difference between pop and apply alone causes confusion). Log gets a dedicated section because git log is really a query language disguised as a subcommand, and the flags change its behavior dramatically.
+
+Reset, rebase, and cherry-pick are the power tools. They rewrite history, which means they can destroy work if misused. I separated them to make the distinction clear: reset moves HEAD, rebase replays commits, cherry-pick copies individual commits. The tags section rounds things out because tagging is simple but the push semantics for tags differ from branches in ways that catch people off guard.
+
+Every command here works with any modern git version (2.23+). The newer switch/restore commands are included alongside the traditional checkout equivalents. I still use checkout out of muscle memory, but switch and restore are better because they separate two distinct operations that checkout conflated.
+</Box>

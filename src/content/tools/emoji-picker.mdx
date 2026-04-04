@@ -1,0 +1,14 @@
+import { EmojiPickerTool } from "@/components/tools/EmojiPicker"
+import { Box } from "@/components/Box"
+
+<EmojiPickerTool />
+
+<Box>
+I need an emoji picker that lets me click to copy individual emoji characters to the clipboard. The emojis are organized into categories: Smileys, Gestures, Hearts, Animals, Food, Travel, Objects, and Symbols. A search field filters categories by name.
+
+Each emoji is rendered as a native Unicode character, not as an image. This means the appearance depends on your operating system and browser. On macOS you will see Apple's emoji font, on Windows you will see Microsoft's, and on Linux you will see whatever emoji font is installed (typically Noto Color Emoji). The characters are identical regardless of rendering. What you copy to the clipboard is the raw Unicode code point.
+
+The collection is a curated subset of common emojis rather than the full Unicode emoji list (which runs to several thousand entries and would be unwieldy in a grid). The categories cover the most frequently used emojis in practice. If you need a specific obscure emoji, use the OS-level emoji picker or look up the Unicode code point directly.
+
+Clicking an emoji copies it to the clipboard using the Clipboard API. A brief visual feedback indicates which emoji was copied. The tool does not require any external API calls or font downloads.
+</Box>

@@ -1,0 +1,14 @@
+import { BcryptTool } from "@/components/tools/Bcrypt"
+import { Box } from "@/components/Box"
+
+<BcryptTool />
+
+<Box>
+I need a bcrypt hash-and-compare tool with two panels side by side. The left panel takes a plaintext string and a configurable salt round count (default 10, range 4-16) and produces a bcrypt hash. The right panel takes a plaintext string and a bcrypt hash and tells me whether they match.
+
+Bcrypt is a password hashing function designed by Niels Provos and David Mazieres based on the Blowfish cipher. The key property that makes it useful for passwords is that it is deliberately slow, and the cost factor (salt rounds) controls exactly how slow. Each increment of the cost factor doubles the computation time. At round 10 a hash takes roughly 100ms; at round 16 it takes several seconds. This is the point: an attacker who steals a database of bcrypt hashes cannot brute-force them efficiently because each guess is expensive.
+
+The salt is generated automatically and embedded in the output string. A bcrypt hash looks like `$2b$10$...` where `$2b$` is the algorithm identifier, `10` is the cost factor, and the rest encodes the salt and hash together. This means you do not need to store the salt separately. The compare function extracts the salt from the hash, re-hashes the candidate string with that salt, and checks for equality.
+
+Use `bcryptjs` for the implementation since the Web Crypto API does not support bcrypt natively. The library is a pure JavaScript implementation that runs entirely in the browser. Salt generation uses `crypto.getRandomValues()` internally, so it is cryptographically sound despite being a JS polyfill.
+</Box>

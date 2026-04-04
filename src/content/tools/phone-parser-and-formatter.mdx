@@ -1,0 +1,14 @@
+import { PhoneParserTool } from "@/components/tools/PhoneParser"
+import { Box } from "@/components/Box"
+
+<PhoneParserTool />
+
+<Box>
+I need a basic phone number parser and formatter. Enter a phone number in any common format and the tool attempts to detect the country code and output the number in national, international, and E.164 formats.
+
+The parser handles US/Canadian numbers (country code +1, 10-digit national format), UK numbers (country code +44), and falls back to a generic parser for other formats. The detection is regex-based: it strips all non-digit characters, checks the length and leading digits, and applies the appropriate formatting rules.
+
+This is a simplified parser, not a replacement for Google's libphonenumber. A production phone number library needs to know the valid number lengths and patterns for every country, which is a dataset of several hundred kilobytes. This tool handles the common cases (US, UK, and generic international) and displays what it can infer. For countries it does not recognize, it shows "Unknown" for the country and outputs the digits with a best-guess country code split.
+
+E.164 is the ITU standard for international phone number formatting: a `+` prefix, the country code, and the subscriber number with no spaces or punctuation. It is the canonical format for storing phone numbers in databases because it is unambiguous and globally unique. The national and international formats include spaces and parentheses for human readability.
+</Box>

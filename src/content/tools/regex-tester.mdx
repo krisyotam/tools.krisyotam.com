@@ -1,0 +1,16 @@
+import { RegexTesterTool } from "@/components/tools/RegexTester"
+import { Box } from "@/components/Box"
+
+<RegexTesterTool />
+
+<Box>
+I need an inline regex tester for quick pattern validation. Enter a regular expression pattern, toggle the flags (global, case-insensitive, multiline), paste a test string, and see matches highlighted in the text with a count and detailed group information below.
+
+The tool uses JavaScript's native `RegExp` engine, so the flavor is ECMAScript. This means lookbehind is supported in modern browsers, named groups work with `(?<name>...)` syntax, and Unicode property escapes are available with the `u` flag (not exposed here, but you can type it into the pattern if needed).
+
+Match highlighting works by running the regex against the test string and splitting the text into matched and unmatched segments. Matched portions are rendered with a highlight background. When the global flag is enabled, all non-overlapping matches are found. Without the global flag, only the first match is shown.
+
+For each match, the tool displays the matched text, its index in the string, and any captured groups. This is particularly useful for debugging extraction patterns where the groups are the actual data you care about. The match list updates in real time as you type, so you can iteratively refine the pattern.
+
+Be aware that `RegExp` with the global flag is stateful: `lastIndex` advances with each call to `exec()`. The tool handles this correctly by creating fresh regex instances for each evaluation cycle.
+</Box>

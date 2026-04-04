@@ -1,0 +1,14 @@
+import { UrlParserTool } from "@/components/tools/UrlParser"
+import { Box } from "@/components/Box"
+
+<UrlParserTool />
+
+<Box>
+I want a URL parser that breaks a URL into all of its constituent parts: protocol, hostname, port, pathname, search string, hash fragment, and origin. If there are query parameters, list each key-value pair individually so I can inspect them without squinting at a long encoded string.
+
+Under the hood this uses the browser's `URL` constructor, which implements the WHATWG URL Standard. That standard is what browsers actually use when they parse URLs, so the behavior here matches exactly what a browser would do with the same input. It handles edge cases like missing ports defaulting to the protocol's standard port, IDN hostnames, IPv6 bracket notation, and percent-encoded path segments.
+
+The reason I reach for this regularly is debugging OAuth flows and API callbacks. These URLs tend to be absurdly long with dozens of query parameters, some of which are themselves URL-encoded URLs. Being able to paste the whole thing and see each parameter on its own line, decoded, saves significant time compared to parsing it visually or splitting on ampersands in a terminal.
+
+Note that the URL constructor requires a scheme. Bare hostnames like `example.com/path` will fail to parse. This is intentional; a string without a protocol is ambiguous (is it a relative path? a hostname? a Windows file path?) and the tool should not guess.
+</Box>

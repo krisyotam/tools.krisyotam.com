@@ -1,0 +1,14 @@
+import { IntegerBaseConverterTool } from "@/components/tools/IntegerBaseConverter"
+import { Box } from "@/components/Box"
+
+<IntegerBaseConverterTool />
+
+<Box>
+Build a base converter for integers that shows decimal, hexadecimal, octal, and binary simultaneously. Each base gets its own input field. Type into any one of them and all four update in real time. This is bidirectional: if you paste a hex value, you see the decimal and binary instantly, and vice versa.
+
+The implementation is straightforward: `parseInt(value, sourceRadix)` to get the number, then `n.toString(targetRadix)` for each output. Hex output should be uppercased for readability. Each field shows the conventional prefix (0x, 0o, 0b) as a visual hint but strips it before parsing so you can paste values with or without prefixes.
+
+One constraint: this uses JavaScript's native number type, so it is limited to safe integers (up to 2^53 - 1). For values beyond that, the conversions will lose precision. A BigInt-based version could handle arbitrary sizes but for day-to-day work with memory addresses, color values, permission masks, and protocol flags, 53-bit precision covers nearly everything.
+
+Each field has a copy button that copies the value with its prefix. If the input is not valid for the selected base (like "G" in hex or "2" in binary), it shows an error instead of silently producing wrong output.
+</Box>

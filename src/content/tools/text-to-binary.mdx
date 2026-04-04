@@ -1,0 +1,14 @@
+import { TextToBinaryTool } from "@/components/tools/TextToBinary"
+import { Box } from "@/components/Box"
+
+<TextToBinaryTool />
+
+<Box>
+Build a text-to-binary converter with two textareas that update bidirectionally. Type text in the top field, see space-separated binary bytes in the bottom field. Paste binary in the bottom field, see decoded text in the top field. Everything updates as you type.
+
+The encoding is straightforward: for each character, get its code point via `codePointAt()`, convert to base-2 with `toString(2)`, and pad to 8 bits. Characters with code points above 127 get padded to the nearest multiple of 8 bits. The bytes are separated by spaces so the output is human-readable and unambiguous.
+
+Decoding splits on whitespace, parses each chunk as a base-2 integer, and converts back to a character via `String.fromCodePoint()`. If any chunk contains characters other than 0 and 1, the tool shows an error rather than producing garbage.
+
+This is a per-character code-point encoding, not UTF-8 byte encoding. The distinction matters for characters above U+007F: UTF-8 would produce multiple bytes per character with specific prefix bits, while this tool produces one binary group per code point regardless of size. For ASCII text (the common case) the result is identical to UTF-8. For emoji or CJK characters, the binary groups will be wider than 8 bits.
+</Box>

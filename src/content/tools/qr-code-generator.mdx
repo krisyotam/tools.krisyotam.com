@@ -1,0 +1,14 @@
+import { QrCodeGeneratorTool } from "@/components/tools/QrCodeGenerator"
+import { Box } from "@/components/Box"
+
+<QrCodeGeneratorTool />
+
+<Box>
+I need a QR code generator. Enter any text or URL, specify the desired image size, and get a QR code image. Since implementing QR code encoding from scratch in the browser without external dependencies would be a substantial undertaking (Reed-Solomon error correction, data masking, version selection), this tool delegates the encoding to the goqr.me public API at `api.qrserver.com`.
+
+The API is simple: a GET request with the data and size parameters returns a PNG image. The URL is constructed client-side, and the image is loaded directly in the browser via an `img` tag. No intermediate server is involved on my end. The data you encode is sent to the goqr.me API server as part of the URL, so do not use this for sensitive information like passwords or private keys. For those cases, use an offline QR encoder.
+
+The image size is configurable from 50 to 1000 pixels. QR codes are inherently low-resolution (the smallest QR version is 21x21 modules), so larger sizes just mean larger pixels. The image is rendered with `image-rendering: pixelated` to keep the module boundaries sharp rather than anti-aliased.
+
+The generated QR code can be downloaded as a PNG by clicking the download link, which opens the API URL directly. The QR code supports any UTF-8 text, though the maximum data capacity depends on the QR version and error correction level (which the API selects automatically based on the input length).
+</Box>

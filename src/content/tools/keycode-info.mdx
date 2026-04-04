@@ -1,0 +1,14 @@
+import { KeycodeInfoTool } from "@/components/tools/KeycodeInfo"
+import { Box } from "@/components/Box"
+
+<KeycodeInfoTool />
+
+<Box>
+I want a keypress inspector. When I press any key on the keyboard, the tool should display everything the `KeyboardEvent` knows about that keypress: the `key` value (the character or key name), the `code` value (the physical key identifier), the deprecated but still widely referenced `keyCode` and `which` numeric values, the `location` (standard, left, right, or numpad), and the state of all four modifier keys (Shift, Control, Alt, Meta).
+
+The distinction between `key` and `code` is important and often confused. `key` is layout-dependent: on a QWERTY keyboard pressing the key labeled "Z" produces `key: "z"`, but on an AZERTY keyboard the same physical key produces `key: "w"`. Meanwhile `code` is layout-independent: that physical key is always `code: "KeyZ"` regardless of what character it types. Games and shortcuts that care about physical key position should use `code`; text input should use `key`.
+
+The `keyCode` and `which` properties are deprecated in the spec but still used by a huge amount of legacy code and documentation. They return numeric values (e.g., 13 for Enter, 27 for Escape) and their behavior varies slightly across browsers, which is exactly why they were deprecated in favor of `key` and `code`. I include them because I still encounter codebases that reference them and need to look up the numeric mapping.
+
+The `location` property distinguishes between the left and right Shift/Ctrl/Alt/Meta keys and identifies numpad keys. This matters for games and accessibility tools that bind different actions to the left vs. right modifier.
+</Box>

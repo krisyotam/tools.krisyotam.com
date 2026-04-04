@@ -1,0 +1,14 @@
+import { HashTextTool } from "@/components/tools/HashText"
+import { Box } from "@/components/Box"
+
+<HashTextTool />
+
+<Box>
+Build me a text hashing tool that takes arbitrary input and produces digests using every algorithm the Web Crypto API supports: SHA-1, SHA-256, SHA-384, and SHA-512. Show all results simultaneously so I can compare output lengths and formats at a glance rather than toggling between them.
+
+Everything must run client-side through `crypto.subtle.digest()`. The input should never leave the browser. After hashing, convert the raw ArrayBuffer to a lowercase hex string by mapping each byte through `toString(16).padStart(2, "0")`. No external libraries, no polyfills.
+
+The interface should be minimal: a textarea for input, a single hash button, and then one labeled output block per algorithm showing the full hex digest. No dropdowns, no mode selectors. I want to paste text, press hash, and see everything at once.
+
+MD5 is intentionally excluded. The Web Crypto API does not support it, and I have no interest in pulling in a JavaScript polyfill for a broken algorithm. If someone needs MD5 they can use the terminal.
+</Box>

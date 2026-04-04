@@ -1,0 +1,14 @@
+import { MathEvaluatorTool } from "@/components/tools/MathEvaluator"
+import { Box } from "@/components/Box"
+
+<MathEvaluatorTool />
+
+<Box>
+I need a quick math expression evaluator that handles more than a basic calculator but does not require me to open a REPL. It supports the standard arithmetic operators (+, -, *, /), parentheses, exponentiation with `^`, and the common math functions: `sqrt`, `sin`, `cos`, `tan`, `abs`, `pow`, `log`, `ceil`, `floor`, `round`, `min`, `max`. The constants `PI` and `E` are also available.
+
+The implementation works by sanitizing the input expression, replacing function names with their `Math.*` equivalents, replacing `^` with `**`, and evaluating the result using the `Function` constructor. The sanitization step validates that the expression contains only digits, operators, parentheses, whitespace, and recognized function names. This is not a sandbox, but it prevents the most obvious injection vectors. Do not paste untrusted expressions into this tool.
+
+Trigonometric functions use radians, not degrees. If you need degrees, multiply by `PI/180`. The `log` function is the natural logarithm (base e). For base-10 logarithm, use `log(x)/log(10)`. These are standard JavaScript `Math` conventions.
+
+The evaluator returns the result as a JavaScript number, which is an IEEE 754 double-precision float. This means you get about 15-17 significant decimal digits of precision, and very large or very small results may be displayed in scientific notation. Results that are `NaN`, `Infinity`, or `-Infinity` are rejected with an error message.
+</Box>

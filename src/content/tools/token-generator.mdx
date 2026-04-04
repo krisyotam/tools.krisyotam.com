@@ -1,0 +1,14 @@
+import { TokenGeneratorTool } from "@/components/tools/TokenGenerator"
+import { Box } from "@/components/Box"
+
+<TokenGeneratorTool />
+
+<Box>
+I need a random token generator for producing API keys, session tokens, temporary passwords, and unique identifiers. It should let me configure the length (default 32), how many tokens to generate at once, and which character sets to include: uppercase letters, lowercase letters, digits, and symbols.
+
+Use `crypto.getRandomValues()` for generation, not `Math.random()`. The distinction matters. `Math.random()` is a PRNG that is not cryptographically secure and should never be used for tokens that guard access to anything. `crypto.getRandomValues()` draws from the operating system's entropy pool.
+
+The generation logic should work by filling a `Uint32Array` of the desired length, then mapping each value to a character in the combined charset using modulo. This introduces a negligible bias when the charset length does not evenly divide 2^32, but for token generation purposes that bias is irrelevant.
+
+Default to uppercase, lowercase, and digits enabled, symbols off. Most systems choke on special characters in tokens and I would rather opt in than debug URL encoding issues later.
+</Box>

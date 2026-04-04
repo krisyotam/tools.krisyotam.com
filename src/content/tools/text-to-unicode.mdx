@@ -1,0 +1,14 @@
+import { TextToUnicodeTool } from "@/components/tools/TextToUnicode"
+import { Box } from "@/components/Box"
+
+<TextToUnicodeTool />
+
+<Box>
+Build a bidirectional text-to-Unicode converter. Two textareas: type normal text in the top one and see the Unicode code points (U+XXXX format, space-separated) in the bottom one. Paste code points in the bottom one and see the rendered text on top. Live conversion in both directions.
+
+The encoding uses `codePointAt()` rather than `charCodeAt()`. This is critical for characters outside the Basic Multilingual Plane (emoji, mathematical symbols, historic scripts). `charCodeAt()` returns surrogate pair halves for these characters, which would produce wrong code points. `codePointAt()` returns the actual Unicode scalar value. Similarly, `Array.from(text)` iterates by code point, not by UTF-16 code unit, so a single emoji counts as one entry.
+
+Code points are formatted as "U+" followed by the hex value, zero-padded to at least 4 digits. BMP characters get 4 hex digits (U+0041), supplementary plane characters get 5 or 6 (U+1F600). The decoder accepts the U+ prefix optionally and validates that each hex value is between 0 and 0x10FFFF (the maximum Unicode code point).
+
+This is useful when debugging encoding issues, inspecting invisible characters like zero-width joiners or directional marks, or when you need to specify a character by its code point for CSS content properties or HTML numeric entities.
+</Box>

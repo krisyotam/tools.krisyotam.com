@@ -1,0 +1,1007 @@
+@import "tailwindcss";
+
+/* =============================================================================
+ * THEME — Kenya Hara "100 Whites" (from krisyotam.com)
+ * ============================================================================= */
+
+:root {
+  --background: 0 0% 98%;
+  --card: 0 0% 99%;
+  --popover: 0 0% 97%;
+  --secondary: 0 0% 90%;
+  --muted: 0 0% 92%;
+  --accent: 0 0% 96%;
+
+  --foreground: 0 0% 20%;
+  --card-foreground: 0 0% 15%;
+  --popover-foreground: 0 0% 25%;
+  --secondary-foreground: 0 0% 30%;
+  --muted-foreground: 0 0% 50%;
+  --accent-foreground: 0 0% 20%;
+
+  --primary: 0 0% 10%;
+  --primary-foreground: 0 0% 95%;
+
+  --destructive: 0 70% 55%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 0 0% 88%;
+  --input: 0 0% 90%;
+  --ring: 0 0% 40%;
+  --radius: 0.5rem;
+
+  /* Layout */
+  --sidebar-width: 280px;
+
+  /* Semantic aliases */
+  --bg-primary: hsl(var(--background));
+  --bg-secondary: hsl(var(--muted));
+  --bg-tertiary: hsl(var(--secondary));
+  --text-primary: hsl(var(--foreground));
+  --text-secondary: hsl(var(--secondary-foreground));
+  --text-muted: hsl(var(--muted-foreground));
+  --border-color: hsl(var(--border));
+}
+
+.dark {
+  --background: 0 0% 7%;
+  --card: 0 0% 9%;
+  --popover: 0 0% 9%;
+  --secondary: 0 0% 12%;
+  --muted: 0 0% 12%;
+  --accent: 0 0% 12%;
+
+  --foreground: 0 0% 98%;
+  --card-foreground: 0 0% 98%;
+  --popover-foreground: 0 0% 98%;
+  --secondary-foreground: 0 0% 98%;
+  --muted-foreground: 0 0% 70%;
+  --accent-foreground: 0 0% 98%;
+
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 0 0% 15%;
+  --input: 0 0% 15%;
+  --ring: 0 0% 83%;
+
+  --bg-primary: hsl(var(--background));
+  --bg-secondary: hsl(var(--muted));
+  --bg-tertiary: hsl(var(--secondary));
+  --text-primary: hsl(var(--foreground));
+  --text-secondary: hsl(var(--secondary-foreground));
+  --text-muted: hsl(var(--muted-foreground));
+  --border-color: hsl(var(--border));
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --radius: var(--radius);
+}
+
+/* =============================================================================
+ * BASE
+ * ============================================================================= */
+
+* {
+  box-sizing: border-box;
+  border-color: var(--border-color);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans), 'IBM Plex Sans', system-ui, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =============================================================================
+ * SCROLLBAR
+ * ============================================================================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* =============================================================================
+ * SIDEBAR
+ * ============================================================================= */
+
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  padding: 0;
+}
+
+.profile-bento {
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-primary);
+}
+
+.profile-bento-row {
+  display: flex;
+  align-items: stretch;
+}
+
+.profile-bento-row + .profile-bento-row {
+  border-top: 1px solid var(--border-color);
+}
+
+.profile-bento-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-info-cell {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  min-width: 0;
+}
+
+.profile-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.profile-subtitle {
+  font-size: 0.65rem;
+  font-weight: 400;
+  margin: 0.15rem 0 0 0;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.theme-toggle-cell {
+  width: 48px;
+  border: none;
+  border-left: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.theme-toggle-cell:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.search-row {
+  display: flex;
+}
+
+.search-row .search-input {
+  flex: 1;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  padding: 0.625rem 1rem;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  outline: none;
+}
+
+.search-row .search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem;
+}
+
+/* =============================================================================
+ * CATEGORY TREE
+ * ============================================================================= */
+
+.folder-tree {
+  font-size: 0.8rem;
+}
+
+.folder-item {
+  cursor: pointer;
+  padding: 0.35rem 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  transition: color 0.15s;
+  position: relative;
+}
+
+.folder-item:hover {
+  color: var(--text-primary);
+}
+
+.folder-item.active {
+  color: var(--text-primary);
+}
+
+.folder-children {
+  margin-left: 1rem;
+  border-left: 1px solid var(--border-color);
+  padding-left: 0.5rem;
+}
+
+.folder-children .folder-item::before {
+  content: "";
+  position: absolute;
+  left: -0.5rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: transparent;
+  transition: background 0.15s;
+}
+
+.folder-children .folder-item:hover::before,
+.folder-children .folder-item.active::before {
+  background: var(--text-primary);
+}
+
+.category-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.5rem;
+  transition: color 0.15s;
+}
+
+.category-label:hover {
+  color: var(--text-primary);
+}
+
+/* =============================================================================
+ * TOOL PAGE (main content area)
+ * ============================================================================= */
+
+.tool-scroll {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.tool-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+  min-height: 0;
+}
+
+.tool-page-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.tool-page-title {
+  font-family: var(--font-sans), 'IBM Plex Sans', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 0.35rem;
+  color: var(--text-primary);
+}
+
+.tool-page-desc {
+  font-family: var(--font-serif), 'Source Serif 4', Georgia, serif;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.tool-page-body {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Legacy narrow layout for tools not yet converted */
+.tool-content {
+  padding: 3rem 3rem 2rem;
+  max-width: 720px;
+  margin: 0 auto;
+  flex: 1;
+  width: 100%;
+}
+
+/* =============================================================================
+ * CRAFT BLOCK — wide centered tool card (inspired by xmliszt/portfolio modal)
+ * ============================================================================= */
+
+.craft-block {
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.craft-row {
+  display: flex;
+}
+
+.craft-swatch {
+  width: 120px;
+  min-height: 120px;
+  flex-shrink: 0;
+  border: 1px solid var(--border-color);
+}
+
+.craft-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.craft-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.craft-input {
+  padding: 0.45rem 0.65rem;
+  font-size: 0.82rem;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  outline: none;
+  font-family: var(--font-mono), 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+.craft-input:focus {
+  border-color: var(--text-muted);
+}
+
+.craft-color-picker {
+  width: 40px;
+  height: 36px;
+  padding: 2px;
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  cursor: pointer;
+  background: var(--bg-primary);
+}
+
+.craft-slider-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.craft-slider-col {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.craft-slider-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  width: 1rem;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.craft-range {
+  flex: 1;
+  height: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--bg-tertiary);
+  outline: none;
+  cursor: pointer;
+}
+
+.craft-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--text-muted);
+  border: none;
+  cursor: pointer;
+}
+
+.craft-range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: var(--text-muted);
+  border: none;
+  cursor: pointer;
+}
+
+.craft-num {
+  width: 3.2rem;
+  padding: 0.25rem 0.35rem;
+  font-size: 0.72rem;
+  text-align: center;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  outline: none;
+  font-family: var(--font-mono), 'IBM Plex Mono', ui-monospace, monospace;
+  -moz-appearance: textfield;
+}
+
+.craft-num::-webkit-inner-spin-button,
+.craft-num::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.craft-output-strip {
+  display: flex;
+  gap: 1rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
+
+.craft-value-row {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.craft-value-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 2rem;
+}
+
+.craft-value-text {
+  flex: 1;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.72rem;
+  font-family: var(--font-mono), 'IBM Plex Mono', ui-monospace, monospace;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.craft-copy-btn {
+  padding: 0.3rem 0.4rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.craft-copy-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+@media (max-width: 640px) {
+  .craft-row {
+    flex-direction: column;
+  }
+  .craft-swatch {
+    width: 100%;
+    min-height: 60px;
+  }
+  .craft-slider-row {
+    flex-direction: column;
+  }
+  .craft-output-strip {
+    flex-direction: column;
+  }
+}
+
+/* =============================================================================
+ * PROMPT COLLAPSE (always-open, non-collapsible — mirrors krisyotam.com Collapse)
+ * ============================================================================= */
+
+.prompt-collapse {
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.prompt-collapse-header {
+  display: flex;
+  align-items: center;
+  background: var(--bg-secondary);
+  padding: 0.75rem 1.25rem;
+}
+
+.prompt-collapse-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.prompt-collapse-body {
+  display: flex;
+}
+
+.prompt-collapse-strip {
+  width: 0.5rem;
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+}
+
+.prompt-collapse-content {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-family: var(--font-serif), 'Source Serif 4', Georgia, serif;
+}
+
+.prompt-collapse-content p {
+  margin: 0.5rem 0;
+}
+
+.prompt-collapse-content p:first-child {
+  margin-top: 0;
+}
+
+.prompt-collapse-content strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.prompt-collapse-footer {
+  background: var(--bg-secondary);
+  height: 0.5rem;
+}
+
+/* =============================================================================
+ * MDX CONTENT STYLING
+ * ============================================================================= */
+
+.mdx-content h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  color: var(--text-primary);
+}
+
+.mdx-content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem;
+  color: var(--text-primary);
+}
+
+.mdx-content p {
+  margin: 0.75rem 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  font-family: var(--font-serif), 'Source Serif 4', Georgia, serif;
+}
+
+.mdx-content code {
+  background: var(--bg-secondary);
+  padding: 0.15em 0.4em;
+  font-size: 0.85em;
+  border-radius: 2px;
+  font-family: var(--font-mono), 'IBM Plex Mono', var(--font-mono), 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+.mdx-content pre {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  margin: 1rem 0;
+  border: 1px solid var(--border-color);
+}
+
+.mdx-content pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.mdx-content label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.mdx-content input[type="text"],
+.mdx-content input[type="number"],
+.mdx-content input[type="password"],
+.mdx-content textarea,
+.mdx-content select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.82rem;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  outline: none;
+  font-family: var(--font-mono), 'IBM Plex Mono', var(--font-mono), 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+.mdx-content input:focus,
+.mdx-content textarea:focus,
+.mdx-content select:focus {
+  outline: none;
+  border-color: var(--border-color);
+}
+
+.mdx-content textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.mdx-content button {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.78rem;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.mdx-content button:hover {
+  background: var(--border-color);
+}
+
+.mdx-content .output {
+  margin-top: 0;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  font-family: var(--font-mono), 'IBM Plex Mono', var(--font-mono), 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  min-height: 2rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: var(--text-secondary);
+}
+
+/* =============================================================================
+ * TOOL UI COMPONENTS
+ * ============================================================================= */
+
+/* Section card — groups related controls */
+.tool-section {
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  background: var(--bg-primary);
+}
+
+.tool-section-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin: 0 0 1rem 0;
+}
+
+/* Field row — label + input in a consistent rhythm */
+.tool-field {
+  margin-bottom: 0.85rem;
+}
+
+.tool-field:last-child {
+  margin-bottom: 0;
+}
+
+.tool-field label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+/* Output row — label + value + copy button */
+.tool-output-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+  min-height: 2rem;
+}
+
+.tool-output-row:last-child {
+  margin-bottom: 0;
+}
+
+.tool-output-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 5rem;
+  flex-shrink: 0;
+}
+
+.tool-output-value {
+  flex: 1;
+  padding: 0.45rem 0.65rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  font-family: var(--font-mono), 'IBM Plex Mono', var(--font-mono), 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-height: 1.8rem;
+  display: flex;
+  align-items: center;
+}
+
+.tool-copy-btn {
+  padding: 0.35rem 0.5rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.tool-copy-btn:hover {
+  color: var(--text-primary);
+  background: var(--border-color);
+}
+
+/* Inline row — for side-by-side controls */
+.tool-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+  margin-bottom: 0.85rem;
+}
+
+.tool-row > * {
+  flex: 1;
+}
+
+/* Toggle row — checkbox-based option toggles */
+.tool-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 0.85rem;
+}
+
+.tool-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.tool-toggle input[type="checkbox"] {
+  accent-color: var(--text-muted);
+  cursor: pointer;
+}
+
+/* Two-column layout for dual-panel tools */
+.tool-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .tool-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Action bar — buttons row */
+.tool-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+/* =============================================================================
+ * FOOTER
+ * ============================================================================= */
+
+.site-footer {
+  margin-top: auto;
+}
+
+.site-footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.site-footer-rule {
+  border-top: 1px solid var(--border-color);
+}
+
+.site-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0 0.75rem;
+  font-family: var(--font-mono), 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.site-footer-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.site-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.footer-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.1s;
+}
+
+.footer-icon-btn:hover {
+  color: var(--text-primary);
+}
+
+.footer-pulse {
+  position: relative;
+  display: inline-flex;
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+}
+
+.footer-pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--text-muted);
+  opacity: 0.4;
+  animation: footer-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.footer-pulse-dot {
+  position: relative;
+  display: inline-flex;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+@keyframes footer-ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* =============================================================================
+ * RESPONSIVE
+ * ============================================================================= */
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+
+  .tool-content {
+    padding: 1.5rem;
+  }
+}

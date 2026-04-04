@@ -1,0 +1,14 @@
+import { JsonToCsvTool } from "@/components/tools/JsonToCsv"
+import { Box } from "@/components/Box"
+
+<JsonToCsvTool />
+
+<Box>
+I frequently need to convert a JSON array of objects into CSV format for import into spreadsheets, databases, or data analysis tools. This tool auto-detects the column headers by collecting all unique keys across every object in the array, then outputs each object as a row with values in the corresponding columns.
+
+The CSV escaping follows RFC 4180: values containing commas, double quotes, or newlines are wrapped in double quotes, and any embedded double quotes are doubled. Missing keys in individual objects produce empty cells. The header row is always included as the first line.
+
+The input must be a JSON array of objects. A single object, a primitive, or an array of primitives will be rejected with an error message. Nested objects and arrays are stringified rather than flattened, because there is no universal convention for flattening nested JSON into CSV columns. If you need deep flattening, do that as a preprocessing step.
+
+This runs entirely in the browser. No data leaves the page. For large datasets the performance is limited by the browser's string concatenation, but for anything under a few thousand rows it is effectively instant.
+</Box>

@@ -1,0 +1,14 @@
+import { JsonPrettifyTool } from "@/components/tools/JsonPrettify"
+import { Box } from "@/components/Box"
+
+<JsonPrettifyTool />
+
+<Box>
+I need a JSON formatter with two operations: prettify and minify. Prettify should take compact or messy JSON and output it with consistent indentation (configurable, default 2 spaces). Minify should strip all unnecessary whitespace to produce the most compact valid JSON string.
+
+The implementation is trivial: parse with `JSON.parse()`, then serialize with `JSON.stringify(obj, null, indent)` for prettify or `JSON.stringify(obj)` for minify. The value is not in the algorithm but in having it available instantly in the browser without opening a terminal or finding a website that might log my input.
+
+Error handling matters here. If the input is not valid JSON, `JSON.parse()` throws a `SyntaxError` with a message indicating the position and nature of the error. Surface that message directly — it is usually informative enough to locate the problem. Common issues are trailing commas (not valid in JSON despite being valid in JavaScript), single quotes instead of double quotes, and unquoted property names.
+
+The output should be displayed in a preformatted block with horizontal scrolling for deeply nested objects. Include a copy button. The indent selector should accept values from 1 to 8, covering the range from tight to extremely readable.
+</Box>

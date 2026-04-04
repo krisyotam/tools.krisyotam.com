@@ -1,0 +1,14 @@
+import { HmacGeneratorTool } from "@/components/tools/HmacGenerator"
+import { Box } from "@/components/Box"
+
+<HmacGeneratorTool />
+
+<Box>
+I need an HMAC generator that takes a message, a secret key, and an algorithm choice (SHA-256, SHA-384, or SHA-512), then outputs the HMAC as a hexadecimal digest. The implementation should use the Web Crypto API: `crypto.subtle.importKey` to create the HMAC key, then `crypto.subtle.sign` to compute the MAC.
+
+HMAC (Hash-based Message Authentication Code) is defined in RFC 2104. It works by running the hash function twice with the key mixed in via XOR with specific padding constants, which makes it resistant to length extension attacks that plague naive `hash(key + message)` constructions. The security of the HMAC depends on the underlying hash function and the entropy of the key. With SHA-256 and a sufficiently random key, HMAC-SHA256 is considered secure for the foreseeable future.
+
+I use this when verifying webhook signatures. Services like GitHub, Stripe, and Slack sign their webhook payloads with HMAC-SHA256 using a shared secret. To verify that a webhook is authentic, I compute the HMAC of the received body with my secret key and compare it to the signature in the header. This tool lets me do that computation manually during debugging without writing a script.
+
+The Web Crypto API handles the key import and signing natively in the browser. The key is imported as raw bytes with the `sign` usage flag, and the HMAC algorithm is specified with its hash variant. The resulting ArrayBuffer is converted to a hex string for display. No secrets leave the browser.
+</Box>

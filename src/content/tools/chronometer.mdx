@@ -1,0 +1,14 @@
+import { ChronometerTool } from "@/components/tools/Chronometer"
+import { Box } from "@/components/Box"
+
+<ChronometerTool />
+
+<Box>
+I need a stopwatch with lap timing. Start, stop, resume, reset, and record lap times. The display shows elapsed time in HH:MM:SS.cs format (centiseconds, not milliseconds, since milliseconds would flicker too fast to be readable).
+
+The timing uses `Date.now()` rather than accumulating `setInterval` ticks. Interval-based timing drifts because JavaScript timers are not precise. Instead, the start time is recorded, and the display is computed as `Date.now() - startTime + accumulated`. The interval is only used to trigger re-renders at 10ms granularity, not to measure time. When the stopwatch is paused and resumed, the accumulated time from previous sessions is preserved.
+
+Lap times are recorded relative to the start. Each lap entry shows the absolute elapsed time at the moment the lap was recorded, and for laps after the first, it also shows the delta from the previous lap. This lets you see both cumulative and split times.
+
+The timer runs entirely in the browser tab. If the tab is backgrounded, modern browsers may throttle `setInterval` to 1Hz or slower, which means the display will update less frequently. The elapsed time will still be correct when you return to the tab because it is computed from wall-clock time, not tick counts. However, lap times recorded while the tab is backgrounded may reflect the delayed rendering rather than the intended moment.
+</Box>

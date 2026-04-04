@@ -1,0 +1,14 @@
+import { UlidGeneratorTool } from "@/components/tools/UlidGenerator"
+import { Box } from "@/components/Box"
+
+<UlidGeneratorTool />
+
+<Box>
+I need a ULID generator that implements the spec without any external dependencies. A ULID is a Universally Unique Lexicographically Sortable Identifier: 128 bits encoded as 26 Crockford Base32 characters. The first 10 characters encode a 48-bit Unix timestamp in milliseconds, and the remaining 16 characters encode 80 bits of cryptographic randomness.
+
+The Crockford Base32 alphabet is `0123456789ABCDEFGHJKMNPQRSTVWXYZ`. It excludes I, L, O, and U to avoid visual ambiguity and accidental profanity. The encoding for the timestamp portion divides the millisecond timestamp by 32 repeatedly and maps each remainder to the alphabet. The random portion uses `crypto.getRandomValues` for secure randomness.
+
+ULIDs have a key advantage over UUIDv4: because the timestamp comes first and the encoding preserves sort order, ULIDs generated later are always lexicographically greater than earlier ones. This makes them excellent as database primary keys in systems that use B-tree indexes, since new inserts always go to the end of the index rather than causing random page splits. The timestamp also means you can extract an approximate creation time from any ULID without a separate `created_at` column.
+
+I use these as identifiers in systems where I want both uniqueness and time-ordering without coordination between generators. The 80 bits of randomness give a collision probability of roughly 1 in 2^80 for ULIDs generated within the same millisecond, which is negligible for any practical workload.
+</Box>

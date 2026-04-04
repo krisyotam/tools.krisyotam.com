@@ -1,0 +1,14 @@
+import { UuidGeneratorTool } from "@/components/tools/UuidGenerator"
+import { Box } from "@/components/Box"
+
+<UuidGeneratorTool />
+
+<Box>
+Build a UUID generator that produces v4 UUIDs using `crypto.randomUUID()`. Let me specify how many to generate at once (default 5, max 100) and display them all in individual output blocks so I can copy any one easily.
+
+Version 4 UUIDs are 128 bits of randomness formatted as 32 hex digits in the pattern `8-4-4-4-12`, with the version nibble set to 4 and the variant bits set to indicate RFC 4122 compliance. The browser's `crypto.randomUUID()` handles all of this correctly, so the implementation is trivial. No need to construct UUIDs manually from random bytes.
+
+The reason I want bulk generation is that I frequently need to seed test databases, mock API responses, or pre-generate identifiers for batch operations. Generating them one at a time is tedious. Five at a time covers the common case; a hundred covers seeding scripts.
+
+The collision probability for v4 UUIDs is approximately 1 in 2^122 for any given pair, which means you would need to generate roughly 2.71 quintillion UUIDs to have a 50% chance of a single collision. For any practical purpose, they are unique.
+</Box>

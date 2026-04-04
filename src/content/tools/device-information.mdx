@@ -1,0 +1,14 @@
+import { DeviceInformationTool } from "@/components/tools/DeviceInformation"
+import { Box } from "@/components/Box"
+
+<DeviceInformationTool />
+
+<Box>
+I want a page that auto-populates with every piece of device and browser information available from client-side JavaScript. Screen dimensions (both physical screen and current viewport), device pixel ratio, color depth, max touch points, user agent string, platform, language preferences, online status, device memory (via the Device Memory API if available), and logical CPU core count via `navigator.hardwareConcurrency`.
+
+All of this runs on page load with no user interaction needed. The data comes from the `window`, `screen`, and `navigator` objects. None of it requires permissions or API calls. The Device Memory API (`navigator.deviceMemory`) is the only one that has limited browser support; it is available in Chrome and Edge but not Firefox or Safari. When unavailable the tool should show "Not available" rather than omitting the row.
+
+I use this when testing responsive designs across devices, checking whether a particular browser exposes certain APIs, verifying that a user agent string matches what I expect, or simply answering the question "what resolution is this screen actually running at?" The pixel ratio is especially useful: a MacBook reporting 1440x900 at 2x pixel ratio is actually rendering at 2880x1800 physical pixels, and that distinction matters for image sizing and canvas rendering.
+
+Nothing here is sent to any server. The data stays entirely in the browser tab.
+</Box>

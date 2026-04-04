@@ -1,0 +1,16 @@
+import { UserAgentParserTool } from "@/components/tools/UserAgentParser"
+import { Box } from "@/components/Box"
+
+<UserAgentParserTool />
+
+<Box>
+This tool parses a user agent string into its component parts: browser name and version, rendering engine, and operating system. It pre-populates with your current browser's navigator.userAgent value, but you can paste any user agent string to analyze it.
+
+The parser uses a cascade of regular expressions with careful ordering. Browser detection must check for derivative browsers before their parents. Edge, Opera, Vivaldi, and Brave all include "Chrome" in their user agent strings, so those must be matched first. Only if none of the derivatives match does the parser fall back to Chrome. Similarly, Safari detection requires the presence of "Version/" to distinguish it from Chrome on macOS (which also contains "Safari" in its UA string).
+
+OS detection is more straightforward. Windows includes the NT version number, which maps to marketing names through a lookup table (NT 10.0 = Windows 10 or 11, NT 6.1 = Windows 7). macOS includes the version in "Mac OS X 10_15_7" format with underscores instead of dots. Android and iOS include their version numbers directly.
+
+Engine detection distinguishes between WebKit, Blink, Gecko, and Trident. Blink-based browsers report themselves as WebKit (because Blink forked from WebKit), so the parser infers Blink when it sees both WebKit and Chrome without Edge in the string. Gecko is used by Firefox. Trident is the legacy Internet Explorer engine, included here for completeness.
+
+User agent strings are an unreliable mess by design. Every browser lies about being every other browser for compatibility reasons. This parser handles the common cases correctly but will not identify obscure or spoofed user agents. For production browser detection, use feature detection instead.
+</Box>

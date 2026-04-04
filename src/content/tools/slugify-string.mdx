@@ -1,0 +1,14 @@
+import { SlugifyStringTool } from "@/components/tools/SlugifyString"
+import { Box } from "@/components/Box"
+
+<SlugifyStringTool />
+
+<Box>
+I need a slug generator that takes arbitrary text and produces a URL-safe slug. The transformation is: convert to lowercase, replace spaces and underscores with hyphens, strip everything that is not alphanumeric or a hyphen, collapse consecutive hyphens into one, and trim leading/trailing hyphens.
+
+The result should be suitable for use in URL paths, filenames, CSS class names, or any context where you need a human-readable identifier derived from a title or name. A slug like `my-blog-post-title-2024` is easy to read in a URL bar and plays well with SEO since search engines parse hyphens as word separators.
+
+The algorithm is intentionally simple and opinionated. It does not attempt transliteration of accented characters (e.g., converting "u" with an umlaut to "ue") because that mapping is language-dependent and easy to get wrong. If you have accented input, the accented characters will simply be stripped. For a more sophisticated approach you would need a library like `slugify` or `transliterate`, but for English-language titles this covers the common case cleanly.
+
+I use this when creating new pages, naming files, setting up database slugs, or any time I need to go from a human-readable title to a machine-friendly identifier. Doing it by hand is error-prone: you forget to strip a special character, or you leave a trailing hyphen, and then your URLs look sloppy.
+</Box>

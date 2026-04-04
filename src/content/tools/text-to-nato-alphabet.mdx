@@ -1,0 +1,14 @@
+import { TextToNatoTool } from "@/components/tools/TextToNato"
+import { Box } from "@/components/Box"
+
+<TextToNatoTool />
+
+<Box>
+Build a text-to-NATO phonetic alphabet converter. Type any text and see each character mapped to its NATO/ICAO phonetic word. The output shows a row for each character with the original character on the left and the NATO word on the right, plus a combined text output at the bottom with a copy button.
+
+The lookup table uses the standard ICAO/NATO alphabet: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor, Whiskey, X-ray, Yankee, Zulu. Note "Alfa" not "Alpha" -- the ICAO spelling avoids the ambiguity of "ph" for non-English speakers. Digits use the standard telephony pronunciations: Zero through Niner (not "Nine", because "Niner" is less likely to be confused with "No" or "Nein" over a noisy channel).
+
+Characters that are not letters or digits (punctuation, symbols, spaces) are passed through as-is. Spaces show as a dash in the per-character breakdown. The conversion is case-insensitive: 'a' and 'A' both map to "Alfa".
+
+This is a tool you need maybe twice a year, when you are reading a serial number or confirmation code over the phone and want to be unambiguous. Having it always available as a quick lookup beats trying to remember whether I is India or Italy.
+</Box>

@@ -1,0 +1,14 @@
+import { LoremIpsumTool } from "@/components/tools/LoremIpsum"
+import { Box } from "@/components/Box"
+
+<LoremIpsumTool />
+
+<Box>
+Build a lorem ipsum generator with three output modes: paragraphs, sentences, and words. Let me specify a count for whichever unit I select and generate that many. Default to 3 paragraphs since that covers the common use case of filling a layout mockup.
+
+Each paragraph should contain 4 to 6 sentences, randomly varied so they do not all look identical. Sentences should be drawn from a pool of pre-written Latin-style filler text, cycling through the pool as needed. Word mode should draw from the individual words of the standard lorem ipsum passage, capitalizing the first word and ending with a period.
+
+The standard Lorem Ipsum text dates to the 1500s and is a scrambled excerpt from Cicero's "De Finibus Bonorum et Malorum" (45 BC), specifically sections 1.10.32 and 1.10.33. It has been the typographic industry's standard dummy text for over five centuries. The text is deliberately nonsensical in Latin — it was garbled from the original to prevent readers from being distracted by readable content when evaluating a typeface or layout.
+
+Generate output on page load so there is something visible immediately. Include a copy button on the output. The output area should scroll vertically if the content exceeds a reasonable height rather than pushing the page layout.
+</Box>

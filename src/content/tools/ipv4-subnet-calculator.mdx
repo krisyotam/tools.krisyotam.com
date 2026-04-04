@@ -1,0 +1,14 @@
+import { Ipv4SubnetCalculatorTool } from "@/components/tools/Ipv4SubnetCalculator"
+import { Box } from "@/components/Box"
+
+<Ipv4SubnetCalculatorTool />
+
+<Box>
+I need a subnet calculator that takes an IPv4 address in CIDR notation and computes every useful derived value: network address, broadcast address, subnet mask, wildcard mask, first usable host, last usable host, and total number of usable hosts.
+
+The math is pure bitwise arithmetic. The CIDR prefix length determines the subnet mask: a `/24` means the top 24 bits are network bits, so the mask is `255.255.255.0` (or `0xFFFFFF00`). The network address is the IP bitwise-ANDed with the mask. The broadcast address is the network address bitwise-ORed with the inverted mask. First host is network + 1, last host is broadcast - 1, and total hosts is broadcast - network - 1. For /31 and /32 networks, the special cases are handled correctly (point-to-point links and single-host subnets).
+
+The wildcard mask is the bitwise complement of the subnet mask. It is used in Cisco ACLs and OSPF configuration, where the convention is to specify the inverse of the mask rather than the mask itself. If you work with Cisco equipment, having the wildcard immediately available saves a mental inversion step.
+
+All computation happens in JavaScript using unsigned 32-bit integer arithmetic (the `>>> 0` trick forces unsigned interpretation). No external APIs or libraries are involved.
+</Box>

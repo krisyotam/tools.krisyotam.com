@@ -1,0 +1,14 @@
+import { NumeronymGeneratorTool } from "@/components/tools/NumeronymGenerator"
+import { Box } from "@/components/Box"
+
+<NumeronymGeneratorTool />
+
+<Box>
+I need a tool that converts words into numeronyms. A numeronym replaces the middle characters of a word with a count: "internationalization" becomes "i18n", "localization" becomes "l10n", "accessibility" becomes "a11y". The pattern is: first character, count of omitted characters, last character.
+
+The conversion rule is simple: words of 3 characters or fewer are returned as-is (there is nothing to abbreviate), and longer words become first-char + (length - 2) + last-char. The tool processes each whitespace-separated word independently.
+
+Numeronyms originated in the DEC (Digital Equipment Corporation) culture of the 1980s and became widespread in software engineering. The most famous examples are i18n (internationalization), l10n (localization), a11y (accessibility), and k8s (Kubernetes). They function as shorthand in technical writing where the full words would be tedious to type repeatedly.
+
+The tool shows each input word alongside its numeronym, with individual copy buttons. The processing is purely character-counting with no language awareness. It does not attempt to handle hyphenated words, camelCase, or other compound forms. Each whitespace-delimited token is treated as a single word.
+</Box>

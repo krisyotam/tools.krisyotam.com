@@ -1,0 +1,14 @@
+import { ChmodCalculatorTool } from "@/components/tools/ChmodCalculator"
+import { Box } from "@/components/Box"
+
+<ChmodCalculatorTool />
+
+<Box>
+I can never remember the octal chmod values. I know 755 is the common one for executables and 644 for files, but anything beyond that requires me to think about which bit is which. This tool gives me a 3x3 grid of checkboxes (owner, group, other by read, write, execute) and shows the corresponding numeric and symbolic chmod values in real time.
+
+The mapping is straightforward: read is 4, write is 2, execute is 1. Each role (owner, group, other) gets an octal digit that is the sum of its enabled permissions. The symbolic form uses the familiar `rwx` notation with dashes for disabled permissions, prefixed with a `-` to indicate a regular file.
+
+The tool also outputs the full `chmod` command ready to copy. This is the kind of thing that takes five seconds to compute mentally but fifteen seconds to second-guess. Having the visual representation eliminates that friction entirely.
+
+Common permission sets worth memorizing: 755 (rwxr-xr-x) for directories and executables, 644 (rw-r--r--) for regular files, 700 (rwx------) for private directories, 600 (rw-------) for private files like SSH keys, and 777 (rwxrwxrwx) for when you have given up on security entirely.
+</Box>

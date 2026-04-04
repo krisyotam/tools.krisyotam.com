@@ -1,0 +1,14 @@
+import { YamlPrettifyTool } from "@/components/tools/YamlPrettify"
+import { Box } from "@/components/Box"
+
+<YamlPrettifyTool />
+
+<Box>
+This tool takes JSON input and produces cleanly formatted YAML output. It uses the same recursive serializer as the JSON-to-YAML converter: it walks the parsed JSON tree and emits YAML syntax at each level with consistent 2-space indentation.
+
+The reason this accepts JSON rather than YAML is practical. Parsing arbitrary YAML without a library is a fool's errand. YAML has anchors, aliases, flow mappings, block scalars, tags, and about a dozen other features that make hand-written parsers unreliable. JSON, on the other hand, is trivially parsed with `JSON.parse()`. So the workflow is: if you have messy YAML, convert it to JSON first (using any of a dozen tools), then paste the JSON here to get clean YAML back.
+
+The serializer handles all JSON types correctly. Strings that could be misinterpreted as YAML values (booleans, nulls, numbers, or strings containing special characters like colons and hashes) are automatically quoted. Empty arrays and objects serialize as inline `[]` and `{}` rather than producing empty blocks. Nested objects use indented key-value pairs, and arrays use the standard `- ` prefix notation.
+
+This is useful when you are migrating configuration files, reformatting Kubernetes manifests, or cleaning up YAML that has been through multiple edits and has inconsistent indentation. The output is minimal, valid YAML that any parser will accept. It will not produce YAML-specific features like multi-line block scalars or anchors, since those have no JSON equivalent and the input is JSON.
+</Box>

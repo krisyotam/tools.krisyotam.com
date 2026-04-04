@@ -1,0 +1,14 @@
+import { ListConverterTool } from "@/components/tools/ListConverter"
+import { Box } from "@/components/Box"
+
+<ListConverterTool />
+
+<Box>
+Build a list processing tool that takes a multiline text input (one item per line) and applies a configurable chain of transformations. The operations are: trim whitespace, remove empty lines, deduplicate, sort alphabetically, reverse order, convert to lowercase, convert to uppercase, add a prefix to each line, and add a suffix to each line. Each operation is a checkbox toggle, and prefix/suffix have their own text inputs. Everything updates live.
+
+The operation order is fixed and deliberate: trim first (so deduplication and sorting work on clean values), then remove empties, then case conversion, then deduplication (using a Set for O(n) performance), then sort (using localeCompare for correct alphabetical ordering across languages), then reverse, and finally prefix/suffix (applied last so they do not interfere with sorting or deduplication).
+
+This is the tool I use when I have a column of data pasted from a spreadsheet or a log file and I need to clean it up before putting it into code. Add a prefix of `"` and suffix of `",` and you have a JSON array. Prefix with `- ` and you have a YAML list. Sort and deduplicate a list of email addresses. Trim whitespace from CSV exports. These are all the same operation: line-by-line text processing with composable transformations.
+
+The input and output are plain textareas. No fancy list UI, no drag-and-drop reordering. The power is in the composition of simple operations, not in visual complexity.
+</Box>

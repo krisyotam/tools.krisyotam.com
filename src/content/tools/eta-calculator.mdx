@@ -1,0 +1,16 @@
+import { EtaCalculatorTool } from "@/components/tools/EtaCalculator"
+import { Box } from "@/components/Box"
+
+<EtaCalculatorTool />
+
+<Box>
+Enter the total size of a task, how much has been completed, and how long it has taken so far. The calculator derives the completion percentage, average speed, estimated remaining time, and projected ETA.
+
+The math is linear extrapolation: speed = completed / elapsed, remaining = (total - completed) / speed. This assumes constant throughput, which is often wrong in practice (downloads slow down, database imports hit indexes, file copies stall on large files). But a linear estimate is still useful as a baseline expectation. If the real ETA is worse than the linear estimate, something is degrading and worth investigating.
+
+The size unit selector supports bytes through terabytes and a generic "items" option for non-data tasks like processing records or running test cases. The time unit selector supports seconds through days. The ETA is displayed as a wall-clock time using the browser's locale, so it shows when the task will finish in your local timezone.
+
+The output updates reactively as you change any input. This makes it easy to do quick what-if calculations: if I have transferred 350 MB of 1 GB in 2 minutes, when does it finish? Change the completed value to 500 MB and the elapsed to 3 minutes and watch the estimate adjust.
+
+I use this when monitoring long-running operations that do not have their own progress indicators: database restores, rsync transfers, bulk API imports, or any process where I can periodically check how far along it is and want to know whether to wait or go to bed.
+</Box>

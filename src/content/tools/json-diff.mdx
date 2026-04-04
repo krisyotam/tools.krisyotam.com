@@ -1,0 +1,16 @@
+import { JsonDiffTool } from "@/components/tools/JsonDiff"
+import { Box } from "@/components/Box"
+
+<JsonDiffTool />
+
+<Box>
+Paste two JSON objects and see exactly what changed between them. The diff engine walks both object trees recursively and reports three categories of difference: keys that were added (present only in the right), keys that were removed (present only in the left), and keys whose values changed. Added entries are green, removed entries are red, changed entries are amber.
+
+The comparison is structural, not textual. It does not care about whitespace, key ordering, or formatting differences. Two objects with the same keys and values in different orders will show zero differences. This is the correct behavior for JSON comparison because the JSON specification does not assign meaning to key order.
+
+Array comparison is index-based. If the left array has three elements and the right has five, elements at indices 0-2 are compared pairwise, and indices 3-4 show as additions. This is a deliberate simplification. True array diffing (detecting insertions and deletions in the middle) requires LCS algorithms and produces output that is harder to interpret for most use cases. Index-based comparison works well for configuration arrays and API responses where element order is stable.
+
+The path notation uses dot-separated keys for objects and bracket notation for arrays. A path like "users[2].address.city" tells you exactly where in the nested structure the difference lives. This makes it straightforward to locate the change in either the original or modified document.
+
+I reach for this when comparing API responses across versions, checking configuration drift between environments, or verifying that a data migration preserved the right fields. It runs entirely in the browser, so nothing is transmitted to any server.
+</Box>

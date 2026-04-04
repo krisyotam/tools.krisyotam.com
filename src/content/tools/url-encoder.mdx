@@ -1,0 +1,14 @@
+import { UrlEncoderTool } from "@/components/tools/UrlEncoder"
+import { Box } from "@/components/Box"
+
+<UrlEncoderTool />
+
+<Box>
+I need a URL encoder and decoder with mode toggle. Encoding should use `encodeURIComponent()` which converts every character except `A-Z a-z 0-9 - _ . ! ~ * ' ( )` into percent-encoded form. Decoding should use `decodeURIComponent()` to reverse that process.
+
+The reason I reach for this constantly is debugging query strings. When a URL parameter contains a nested URL, or JSON, or any string with reserved characters, it becomes unreadable in percent-encoded form. I need to paste it, hit decode, and see what is actually there. Going the other direction is equally common when constructing URLs by hand for curl commands or API testing.
+
+Note the distinction between `encodeURI` and `encodeURIComponent`. The former leaves reserved URI characters like `&`, `=`, and `/` intact because it is meant for encoding full URIs. The latter encodes everything because it is meant for individual parameter values. This tool should use `encodeURIComponent` since that is what you want 95% of the time. If someone needs `encodeURI` behavior they can leave the slashes alone manually.
+
+Wrap the conversion in a try-catch. Malformed percent sequences like `%ZZ` will cause `decodeURIComponent` to throw a `URIError`, and the tool should surface that cleanly.
+</Box>

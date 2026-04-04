@@ -1,0 +1,14 @@
+import { HttpStatusCodesTool } from "@/components/tools/HttpStatusCodes"
+import { Box } from "@/components/Box"
+
+<HttpStatusCodesTool />
+
+<Box>
+I want a searchable reference of all standard HTTP status codes, grouped by class: 1xx Informational, 2xx Success, 3xx Redirection, 4xx Client Error, and 5xx Server Error. Each entry should show the numeric code, the standard reason phrase, and a concise description of what it means.
+
+The search should filter across code numbers, names, and descriptions. If I type "cache" it should surface 304 Not Modified. If I type "429" it should show just that entry. The filtering should be instant, no debounce needed for a static list this size.
+
+The codes included here cover the IANA HTTP Status Code Registry as of the current RFCs (7231, 7232, 7233, 7235, 7538, 6585, 8297, and others). I have included the well-known joke entry 418 "I'm a Teapot" from RFC 2324 because it appears in enough real-world implementations that people look it up. I have omitted unofficial codes like 499 (nginx) or 520-530 (Cloudflare) since those are vendor-specific.
+
+I keep this reference open in a tab while debugging HTTP interactions. The question is always the same: "what does 422 mean again?" or "is 307 the one that preserves the method?" Being able to search and scan grouped results is faster than opening the RFC or MDN every time.
+</Box>

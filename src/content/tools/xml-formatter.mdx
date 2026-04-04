@@ -1,0 +1,16 @@
+import { XmlFormatterTool } from "@/components/tools/XmlFormatter"
+import { Box } from "@/components/Box"
+
+<XmlFormatterTool />
+
+<Box>
+Paste minified or poorly indented XML and get back a cleanly formatted version with consistent indentation. The formatter strips existing whitespace between tags, then rebuilds the indentation by tracking depth as it walks through the tag sequence.
+
+The approach is regex-based rather than DOM-based. It splits the XML into tokens (tags and text nodes), classifies each token as an opening tag, closing tag, self-closing tag, processing instruction, comment, or text content, then emits each token on its own line at the appropriate indentation level. Opening tags increase depth, closing tags decrease it.
+
+A post-processing pass merges short inline elements. If an opening tag, a short text node, and its closing tag appear on three consecutive lines, they get collapsed into a single line like `<name>John</name>` instead of spreading across three lines. This keeps the output readable rather than unnecessarily verbose.
+
+The formatter does not validate the XML. It will happily format malformed XML, producing output that looks structured but may still be invalid. If you need validation, use a proper XML parser. This tool is for readability, not correctness checking.
+
+I use this when dealing with SOAP responses, Maven POM files, SVG markup, and configuration files that come back from APIs as a single unbroken line. The configurable indent size (1-8 spaces) lets you match whatever convention the project uses. Most XML projects use 2 or 4 spaces.
+</Box>

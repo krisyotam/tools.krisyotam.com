@@ -1,0 +1,14 @@
+import { Ipv4AddressConverterTool } from "@/components/tools/Ipv4AddressConverter"
+import { Box } from "@/components/Box"
+
+<Ipv4AddressConverterTool />
+
+<Box>
+I need a tool that converts an IPv4 address between its four common representations: dotted decimal (192.168.1.1), binary with dot separators (11000000.10101000.00000001.00000001), hexadecimal (0xC0A80101), and 32-bit unsigned integer (3232235777). Enter any one of these forms and get all four.
+
+The input parser auto-detects the format. If it contains dots and decimal octets, it is treated as dotted decimal. If it starts with `0x`, hexadecimal. If it contains dots and only 0/1 characters, binary. Otherwise, if it is a plain integer in the range 0 to 4294967295, it is treated as an integer. The detection is unambiguous because the formats do not overlap.
+
+This is useful when reading network packet captures (which often show hex), when configuring systems that expect integer representations, or when examining binary subnet masks. The conversions are trivial bit manipulations, but doing them in your head is tedious and error-prone.
+
+All arithmetic uses JavaScript's unsigned 32-bit integer operations via the `>>> 0` idiom. The binary representation is grouped into four 8-bit octets separated by dots for readability, matching the dotted-decimal structure. The hex output is zero-padded to 8 characters.
+</Box>

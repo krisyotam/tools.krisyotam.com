@@ -1,0 +1,16 @@
+import { BenchmarkBuilderTool } from "@/components/tools/BenchmarkBuilder"
+import { Box } from "@/components/Box"
+
+<BenchmarkBuilderTool />
+
+<Box>
+Paste two JavaScript code snippets and run them head-to-head. Each snippet executes N iterations (default 10,000), timed with performance.now(), and the results show total execution time for each and which one is faster by what factor.
+
+The implementation uses `new Function()` to compile each snippet into a callable function. This means the code executes in its own scope without access to the page's variables, which is both a feature (no accidental side effects) and a limitation (no imports or external references). Each snippet should be self-contained.
+
+A 100-iteration warmup runs before the timed loop. This gives the JIT compiler a chance to optimize the hot path before measurement begins. Without warmup, the first snippet would unfairly include JIT compilation time that the second snippet might avoid due to similar code patterns already being compiled.
+
+The results should be interpreted with care. Microbenchmarks in JavaScript are notoriously unreliable. The JIT can optimize away dead code, inline functions differently across runs, and produce results that vary by 20% or more between executions. Garbage collection pauses can spike individual runs. The browser's internal task scheduler can preempt your code unpredictably. Run the benchmark multiple times and look for consistent patterns rather than trusting a single result.
+
+That said, for the common question of "is approach A or B faster for this particular operation," a microbenchmark gives you a directional answer that is usually correct even if the precise numbers are noisy. I use this for quick comparisons like for-loop vs reduce, string concatenation vs template literals, or Map vs plain object lookups.
+</Box>

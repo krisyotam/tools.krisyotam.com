@@ -1,0 +1,16 @@
+import { SafelinkDecoderTool } from "@/components/tools/SafelinkDecoder"
+import { Box } from "@/components/Box"
+
+<SafelinkDecoderTool />
+
+<Box>
+Microsoft Outlook's SafeLinks feature rewrites URLs in emails to route them through a scanning proxy. The original URL gets URL-encoded and stuffed into a `url=` query parameter on a long safelinks.protection.outlook.com domain. This tool extracts the original URL from that wrapper so you can see where a link actually goes before clicking it.
+
+The implementation is simple URL parsing. It creates a URL object from the pasted SafeLink, reads the `url` query parameter, and displays the decoded result. No network requests, no external services. The URL API handles the percent-decoding automatically.
+
+Beyond Outlook SafeLinks, this also handles several other common redirect URL patterns. Google's redirect links use a `q=` parameter. Various marketing tools and link trackers use `redirect=`, `target=`, `dest=`, `goto=`, or `to=` parameters. The tool checks all of these in sequence and returns the first match.
+
+I use this primarily for Outlook SafeLinks because those URLs are comically long and completely opaque. You cannot tell by looking at a SafeLink whether it points to a legitimate document or a phishing page. Decoding it lets you inspect the destination domain before visiting. This is especially useful in corporate environments where every external link arrives wrapped in SafeLinks and you want to verify the actual destination rather than blindly trusting the proxy.
+
+Note that this does not validate whether the extracted URL is safe to visit. It only reveals what the URL is. The security judgment is still yours.
+</Box>

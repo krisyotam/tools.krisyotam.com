@@ -1,0 +1,14 @@
+import { BasicAuthGeneratorTool } from "@/components/tools/BasicAuthGenerator"
+import { Box } from "@/components/Box"
+
+<BasicAuthGeneratorTool />
+
+<Box>
+I need a tool that takes a username and password and produces the HTTP Basic Authentication header value. The format is straightforward: concatenate `username:password`, base64-encode it, and prepend `Basic `. The output should show both the full header value (`Basic dXNlcjpwYXNz`) and the raw base64 string separately, each with a copy button.
+
+HTTP Basic Auth is defined in RFC 7617. The credentials are combined into a single string separated by a colon, then encoded with base64. The resulting header looks like `Authorization: Basic dXNlcjpwYXNz`. Despite being "encoded," this provides zero security on its own since base64 is trivially reversible. Basic Auth should only ever be used over HTTPS.
+
+I use this when testing APIs with curl or Postman. Many internal services, CI/CD webhooks, and legacy APIs still use Basic Auth. Rather than remembering the base64 command-line syntax or looking up the header format, I can type the credentials here and copy the ready-to-use header value.
+
+The implementation uses `btoa()` which works for ASCII credentials. If you need to send UTF-8 usernames or passwords, the spec says to use UTF-8 encoding before base64, but `btoa()` only handles Latin-1. For the vast majority of use cases this is fine.
+</Box>

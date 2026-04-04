@@ -1,0 +1,14 @@
+import { JsonMinifyTool } from "@/components/tools/JsonMinify"
+import { Box } from "@/components/Box"
+
+<JsonMinifyTool />
+
+<Box>
+I need a JSON minifier. Paste in prettified or messy JSON, get back the most compact valid representation with all unnecessary whitespace stripped. The implementation is `JSON.parse()` followed by `JSON.stringify()` with no indentation argument. That is the entire algorithm.
+
+The value is convenience. When I am preparing a JSON payload for a curl command, embedding JSON in a configuration file, or reducing the size of a fixture for a test suite, I want the compact form immediately without opening a terminal. The browser does not log or transmit the input anywhere.
+
+If the input is not valid JSON, `JSON.parse()` throws a `SyntaxError` with a message indicating where parsing failed. That message is displayed directly. The most common issues are trailing commas (legal in JavaScript, illegal in JSON), single-quoted strings, unquoted keys, and comments. JSON is stricter than most people expect because they are used to writing JavaScript object literals, which are a superset of JSON syntax.
+
+The output is displayed in a preformatted block with word-wrapping enabled, since minified JSON can produce extremely long single lines. A copy button is provided for the result.
+</Box>

@@ -1,0 +1,14 @@
+import { TextDiffTool } from "@/components/tools/TextDiff"
+import { Box } from "@/components/Box"
+
+<TextDiffTool />
+
+<Box>
+I need a line-by-line text diff tool. Paste the original text in one field and the modified text in the other, and the tool shows a unified-style diff with added lines highlighted in green, removed lines in red, and unchanged lines with neutral formatting. Each line is prefixed with `+`, `-`, or a space to indicate its status.
+
+The diff algorithm uses the longest common subsequence (LCS) approach via dynamic programming. This is the same fundamental algorithm behind `diff(1)` and `git diff`, though the production implementations use optimizations (Myers' O(ND) algorithm, patience diff) that this tool does not. For the text sizes people paste into a browser input, the naive O(n*m) DP approach is fast enough.
+
+The LCS table is built by comparing lines of the original and modified texts. The backtracking step produces the minimal edit script: which lines are shared, which were removed from the original, and which were added in the modified version. Lines are compared for exact equality, so whitespace differences (trailing spaces, tabs vs spaces) will show up as changes.
+
+This tool is for quick comparisons. It does not support inline word-level diffs within changed lines, three-way merges, or syntax-aware diffing. For those, use a real diff tool. The value here is speed: paste two versions, see what changed, move on.
+</Box>

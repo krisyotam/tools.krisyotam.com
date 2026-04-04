@@ -1,0 +1,14 @@
+import { StringObfuscatorTool } from "@/components/tools/StringObfuscator"
+import { Box } from "@/components/Box"
+
+<StringObfuscatorTool />
+
+<Box>
+I need a tool that masks portions of sensitive strings for use in logs, documentation, and support tickets. Enter a string, specify how many characters to keep visible at the start and end, choose a mask character, and get the obfuscated version. For example, "my-secret-api-key" with 3 visible at each end becomes "my-***********key".
+
+The default mask character is a bullet (U+2022), which is visually distinct from asterisks and clearly communicates that the content is intentionally hidden. You can change it to any single character: asterisks, X, or whatever your logging convention requires.
+
+The tool processes multiple strings at once (one per line), which is useful when you need to redact a batch of API keys or tokens for a bug report. If the string is shorter than the sum of the keep-first and keep-last values, it is returned unmodified, since there is nothing left to mask.
+
+This is a presentation tool, not a security tool. The original string is still in your browser's memory and in the input field. If you need actual secret redaction for production logs, do it server-side before the data ever reaches a client. This tool is for the human workflow of preparing sanitized strings for communication.
+</Box>
