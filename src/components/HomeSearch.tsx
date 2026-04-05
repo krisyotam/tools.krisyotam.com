@@ -42,15 +42,9 @@ export function HomeSearch({ tools }: { tools: ToolInfo[] }) {
           placeholder="Search tools..."
           autoFocus
           style={{
-            width: "100%",
             padding: "0.75rem 1rem",
-            fontSize: "0.9rem",
-            background: "var(--bg-primary)",
-            color: "var(--text-primary)",
-            border: "1px solid var(--border-color)",
-            borderRadius: 0,
-            outline: "none",
-            fontFamily: "system-ui, sans-serif",
+            fontSize: "0.88rem",
+            fontFamily: "var(--font-sans), 'IBM Plex Sans', system-ui, sans-serif",
           }}
         />
         {!query && (
